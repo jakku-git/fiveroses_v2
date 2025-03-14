@@ -40,16 +40,16 @@ export const TextHoverEffect = ({
       className="select-none"
     >
       <defs>
-        {/* ✅ Updated to make gradient colors brighter */}
+        {/* ✅ Improved color contrast for better visibility */}
         <linearGradient id="textGradient" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#FFD700" /> {/* Gold */}
-          <stop offset="25%" stopColor="#FF4500" /> {/* OrangeRed */}
-          <stop offset="50%" stopColor="#00BFFF" /> {/* DeepSkyBlue */}
-          <stop offset="75%" stopColor="#7CFC00" /> {/* LawnGreen */}
+          <stop offset="0%" stopColor="#FFFFFF" /> {/* White */}
+          <stop offset="25%" stopColor="#FFD700" /> {/* Gold */}
+          <stop offset="50%" stopColor="#FF4500" /> {/* OrangeRed */}
+          <stop offset="75%" stopColor="#00BFFF" /> {/* DeepSkyBlue */}
           <stop offset="100%" stopColor="#FF69B4" /> {/* HotPink */}
         </linearGradient>
 
-        {/* ✅ Bright radial glow effect */}
+        {/* ✅ Fixed reveal mask animation */}
         <radialGradient id="revealMask" gradientUnits="userSpaceOnUse">
           <motion.stop
             offset="0%"
@@ -61,18 +61,26 @@ export const TextHoverEffect = ({
         </radialGradient>
 
         <mask id="textMask">
-          <rect x="0" y="0" width="100%" height="100%" fill="url(#revealMask)" />
+          <motion.rect
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            fill="url(#revealMask)"
+            animate={{ opacity: hovered ? 1 : 0 }}
+            transition={{ duration: 0.3 }}
+          />
         </mask>
       </defs>
 
-      {/* ✅ Added glow effect to make text visible */}
+      {/* ✅ Text Outline to Ensure Visibility */}
       <motion.text
         x="50%"
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="1"
-        className="font-[helvetica] font-bold fill-transparent text-8xl stroke-white drop-shadow-lg"
+        className="font-[helvetica] font-bold fill-transparent text-6xl md:text-7xl stroke-white drop-shadow-lg"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
@@ -86,20 +94,19 @@ export const TextHoverEffect = ({
         {text}
       </motion.text>
 
-      {/* ✅ Gradient-filled masked text */}
+      {/* ✅ Hover Effect Applied */}
       <text
-  x="50%"
-  y="50%"
-  textAnchor="middle"
-  dominantBaseline="middle"
-  stroke="white" // ✅ Force white stroke
-  fill="white" // ✅ Force white fill
-  strokeWidth="0.7"
-  mask="url(#textMask)"
-  className="font-[helvetica] font-bold text-8xl bg-red-500" // ✅ TEMP background color
->
-  {text}
-</text>
+        x="50%"
+        y="50%"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        stroke="url(#textGradient)"
+        strokeWidth="0.7"
+        mask="url(#textMask)"
+        className="font-[helvetica] font-bold text-6xl md:text-7xl"
+      >
+        {text}
+      </text>
     </svg>
   )
 }
