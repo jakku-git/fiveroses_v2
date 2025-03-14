@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { TextGenerateEffect } from "@/components/ui-components/text-generate-effect" // Import the Text Generate Effect
+import { TextGenerateEffect } from "@/components/ui-components/text-generate-effect"
+import { TextHoverEffect } from "@/components/ui-components/text-hover-effect" // ✅ Import the Text Hover Effect
 
 export const BackgroundBoxes = () => {
   const [mounted, setMounted] = useState(false)
@@ -62,11 +63,13 @@ export const BackgroundBoxes = () => {
       )}
 
       <div className="relative z-10 text-center px-6">
-        {/* Replace static text with Text Generate Effect */}
-        <TextGenerateEffect
-          words="fiveroses"
-          className="text-12xl md:text-14xl font-bold mb-6 text-white"
+        {/* ✅ Replace "fiveroses" with the Text Hover Effect */}
+        <TextHoverEffect 
+          words="fiveroses" 
+          className="text-6xl md:text-8xl font-bold mb-6 text-white"
         />
+
+        {/* ✅ Keep the description using the Text Generate Effect */}
         <TextGenerateEffect
           words="a creative digital agency focused on growing brands through strategic and innovative marketing solutions."
           className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto"
