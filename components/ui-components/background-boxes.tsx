@@ -10,8 +10,8 @@ export const BackgroundBoxes = () => {
     setMounted(true)
   }, [])
 
-  const rows = 10
-  const cols = 10
+  const rows = 16
+  const cols = 16
 
   const generateRandomColor = () => {
     const colors = ["#FF5F6D", "#FFC371", "#FF9A8B", "#FF6A88", "#FF99AC"]
@@ -67,7 +67,7 @@ export const BackgroundBoxes = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="text-3xl md:text-5xl font-bold mb-6 text-white"
         >
-          Creative Digital Agency
+          fiveroses
         </motion.h3>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -75,8 +75,8 @@ export const BackgroundBoxes = () => {
           transition={{ duration: 1, delay: 0.7 }}
           className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto"
         >
-          fiveroses is a creative digital agency focused on growing brands through strategic design and innovative
-          technology solutions.
+          a creative digital agency focused on growing brands through strategic and innovative
+          marketing solutions.
         </motion.p>
       </div>
     </div>
