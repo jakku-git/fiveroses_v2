@@ -9,7 +9,7 @@ export function Footer() {
           <div>
             <h3 className="text-2xl font-bold mb-6">MAKE YOUR IDEAS COME ALIVE</h3>
             <p className="text-gray-400 mb-6">
-              your brand's story starts here
+              fiveroses digital experiences that bloom with creativity and innovation.
             </p>
             <div className="flex space-x-4">
               <Link href="#" className="text-white hover:text-rose-400 transition-colors">
