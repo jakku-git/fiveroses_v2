@@ -39,7 +39,7 @@ export function Hero() {
           <div className="relative overflow-hidden">
             <div className="hero-image absolute inset-0 transition-transform duration-500 ease-out">
               <Image
-                src="/placeholder.svg?height=800&width=600"
+                src="/11922005_2160_3840_24fps.mp4?height=800&width=600"
                 alt="Creative visual"
                 fill
                 className="object-cover"
@@ -50,7 +50,7 @@ export function Hero() {
           <div className="relative overflow-hidden">
             <div className="hero-image absolute inset-0 transition-transform duration-500 ease-out">
               <Image
-                src="/placeholder.svg?height=800&width=600"
+                src="/11922005_2160_3840_24fps.mp4?height=800&width=600"
                 alt="Creative visual"
                 fill
                 className="object-cover"
@@ -61,7 +61,7 @@ export function Hero() {
           <div className="relative overflow-hidden">
             <div className="hero-image absolute inset-0 transition-transform duration-500 ease-out">
               <Image
-                src="/placeholder.svg?height=800&width=600"
+                src="/11922005_2160_3840_24fps.mp4?height=800&width=600"
                 alt="Creative visual"
                 fill
                 className="object-cover"
