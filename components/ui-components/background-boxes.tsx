@@ -75,7 +75,7 @@ export const BackgroundBoxes = () => {
           transition={{ duration: 1, delay: 0.7 }}
           className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto"
         >
-          FiveRoses is a creative digital agency focused on growing brands through strategic design and innovative
+          fiveroses. is a creative digital agency focused on growing brands through strategic design and innovative
           technology solutions.
         </motion.p>
       </div>

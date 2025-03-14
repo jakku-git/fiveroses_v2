@@ -15,21 +15,21 @@ export const Carousel = () => {
       name: "Emma Thompson",
       role: "CEO, TechStart",
       content:
-        "Working with FiveRoses was a game-changer for our brand. Their creative approach and technical expertise transformed our digital presence completely.",
+        "Working with fiveroses. was a game-changer for our brand. Their creative approach and technical expertise transformed our digital presence completely.",
       image: "/placeholder.svg?height=100&width=100",
     },
     {
       name: "David Chen",
       role: "Marketing Director, Innovate Inc",
       content:
-        "The team at FiveRoses delivered beyond our expectations. Their attention to detail and strategic thinking helped us achieve remarkable growth.",
+        "The team at fiveroses. delivered beyond our expectations. Their attention to detail and strategic thinking helped us achieve remarkable growth.",
       image: "/placeholder.svg?height=100&width=100",
     },
     {
       name: "Sarah Johnson",
       role: "Founder, Bloom Boutique",
       content:
-        "FiveRoses understood our vision perfectly and brought it to life with stunning design and flawless functionality. Couldn't be happier with the results.",
+        "fiveroses. understood our vision perfectly and brought it to life with stunning design and flawless functionality. Couldn't be happier with the results.",
       image: "/placeholder.svg?height=100&width=100",
     },
   ]
