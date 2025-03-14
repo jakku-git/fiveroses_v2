@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
+import { TextGenerateEffect } from "@/components/ui-components/text-generate-effect" // Import the Text Generate Effect
 
 export const BackgroundBoxes = () => {
   const [mounted, setMounted] = useState(false)
@@ -14,7 +15,7 @@ export const BackgroundBoxes = () => {
   const cols = 20
 
   const generateRandomColor = () => {
-    const colors = ["#FF5F6D", "#FFC371", "#FF9A8B", "#FF6A88", "#FF99AC, #FF7F50, #FFB6C1, #FFDAB9, #F28C8C, #FDA7DC, #5BCEFA, #3A86FF, #00A9FF, #6EC6FF, #89CFF0, #9B5DE5, #D883FF, #C77DFF, #A064FF, #BE90FF"]
+    const colors = ["#FF5F6D", "#FFC371", "#FF9A8B", "#FF6A88", "#FF99AC", "#FF7F50", "#FFB6C1", "#FFDAB9", "#F28C8C", "#FDA7DC", "#5BCEFA", "#3A86FF", "#00A9FF", "#6EC6FF", "#89CFF0", "#9B5DE5", "#D883FF", "#C77DFF", "#A064FF", "#BE90FF"]
     return colors[Math.floor(Math.random() * colors.length)]
   }
 
@@ -61,25 +62,16 @@ export const BackgroundBoxes = () => {
       )}
 
       <div className="relative z-10 text-center px-6">
-        <motion.h3
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+        {/* Replace static text with Text Generate Effect */}
+        <TextGenerateEffect
+          words="fiveroses"
           className="text-3xl md:text-5xl font-bold mb-6 text-white"
-        >
-          fiveroses
-        </motion.h3>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.7 }}
+        />
+        <TextGenerateEffect
+          words="a creative digital agency focused on growing brands through strategic and innovative marketing solutions."
           className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto"
-        >
-          a creative digital agency focused on growing brands through strategic and innovative
-          marketing solutions.
-        </motion.p>
+        />
       </div>
     </div>
   )
 }
-
