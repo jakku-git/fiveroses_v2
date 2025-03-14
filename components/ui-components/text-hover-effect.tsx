@@ -41,11 +41,11 @@ export const TextHoverEffect = ({
       className="select-none"
     >
       <defs>
-        {/* ✅ Bright gradient for hover effect */}
+        {/* ✅ Changed hover effect to pastel red */}
         <linearGradient id="textGradient" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="white" />
-          <stop offset="50%" stopColor="cyan" />
-          <stop offset="100%" stopColor="hotpink" />
+          <stop offset="50%" stopColor="#FFB6C1" /> {/* Pastel Red (LightPink) */}
+          <stop offset="100%" stopColor="#FF9999" /> {/* Soft Coral */}
         </linearGradient>
 
         {/* ✅ Increased reveal radius for better visibility */}
@@ -93,7 +93,7 @@ export const TextHoverEffect = ({
         {text}
       </motion.text>
 
-      {/* ✅ Hover Effect: Now fully applies to the entire text */}
+      {/* ✅ Hover Effect: Now pastel red */}
       <text
         x="50%"
         y="50%"
