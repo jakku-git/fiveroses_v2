@@ -84,7 +84,7 @@ export function Hero() {
         >
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">BRING YOUR IDEAS ALIVE</h1>
           <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8">
-            your brand's story starts here
+            YOUR BRAND'S STORY STARTS HERE
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
