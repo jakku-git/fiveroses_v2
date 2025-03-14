@@ -65,10 +65,10 @@ export const ThreeDCard = () => {
         </div>
 
         <div className="relative z-20">
-          <h3 className="text-2xl font-bold text-white mb-2">Sarah Johnson</h3>
+          <h3 className="text-2xl font-bold text-white mb-2">Jack Li</h3>
           <p className="text-rose-300 mb-4">Creative Director</p>
           <p className="text-white/80 text-sm">
-            With over 10 years of experience in design and branding, Sarah leads our creative team with passion and
+            With over 10 years of experience in design and branding, Jack leads our creative team with passion and
             innovation.
           </p>
         </div>

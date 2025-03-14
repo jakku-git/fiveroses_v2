@@ -7,7 +7,7 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
-            <h3 className="text-2xl font-bold mb-6">fiveroses.</h3>
+            <h3 className="text-2xl font-bold mb-6">fiveroses</h3>
             <p className="text-gray-400 mb-6">
               Crafting digital experiences that bloom with creativity and innovation.
             </p>
@@ -89,8 +89,8 @@ export function Footer() {
               <p className="mb-3">123 Design Street</p>
               <p className="mb-3">Creative City, CD 12345</p>
               <p className="mb-3">
-                <a href="mailto:hello@fiveroses..com" className="hover:text-white transition-colors">
-                  hello@fiveroses..com
+                <a href="mailto:hello@fiveroses.com" className="hover:text-white transition-colors">
+                  hello@fiveroses.com
                 </a>
               </p>
               <p>
@@ -104,7 +104,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} fiveroses.. All rights reserved.
+            &copy; {new Date().getFullYear()} fiveroses. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <Link href="#" className="text-gray-400 text-sm hover:text-white transition-colors">

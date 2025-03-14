@@ -84,10 +84,10 @@ export const EvervaultCard = () => {
       </div>
 
       <div className="relative h-full p-6 flex flex-col justify-end z-10">
-        <h3 className="text-2xl font-bold text-white mb-2">Alex Rivera</h3>
-        <p className="text-rose-300 mb-4">Design Lead</p>
+        <h3 className="text-2xl font-bold text-white mb-2">fiveroses</h3>
+        <p className="text-rose-300 mb-4">Head Honcho</p>
         <p className="text-white/80 text-sm">
-          Alex combines artistic vision with strategic thinking to create designs that are both beautiful and effective.
+          fiveroses combines artistic vision with strategic thinking to create designs that are both beautiful and effective.
         </p>
       </div>
     </motion.div>

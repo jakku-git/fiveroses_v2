@@ -27,7 +27,7 @@ export function Navbar() {
     >
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold">
-          fiveroses.
+          fiveroses
         </Link>
 
         {/* Desktop Navigation */}

@@ -57,10 +57,10 @@ export const CardSpotlight = () => {
       </div>
 
       <div className="relative h-full p-6 flex flex-col justify-end z-10">
-        <h3 className="text-2xl font-bold text-white mb-2">Michael Chen</h3>
-        <p className="text-rose-300 mb-4">Technical Director</p>
+        <h3 className="text-2xl font-bold text-white mb-2">Rose Yang</h3>
+        <p className="text-rose-300 mb-4">Chief Financial Officer</p>
         <p className="text-white/80 text-sm">
-          Michael brings technical expertise and innovation to every project, ensuring seamless implementation and
+          Rose brings analytical expertise and critical thinking to every project, ensuring seamless implementation and
           optimal performance.
         </p>
       </div>
