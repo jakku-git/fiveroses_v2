@@ -82,9 +82,9 @@ export function Hero() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">fiveroses</h1>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">BRING YOUR IDEAS ALIVE</h1>
           <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8">
-            Crafting digital experiences that bloom with creativity and innovation
+            your brand's story starts here
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
