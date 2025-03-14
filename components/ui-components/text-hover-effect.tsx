@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 
 export const TextHoverEffect = ({
   text,
-  duration = 0.5,
+  duration = 0.3, // ✅ Slightly faster effect for instant feedback
 }: {
   text: string
   duration?: number
@@ -13,7 +13,7 @@ export const TextHoverEffect = ({
   const svgRef = useRef<SVGSVGElement>(null)
   const [cursor, setCursor] = useState({ x: 0, y: 0 })
   const [hovered, setHovered] = useState(false)
-  const [maskPosition, setMaskPosition] = useState({ cx: "50%", cy: "50%", r: "15%" }) // ✅ Increased mask radius
+  const [maskPosition, setMaskPosition] = useState({ cx: "50%", cy: "50%", r: "25%" }) // ✅ Increased default radius
 
   useEffect(() => {
     if (svgRef.current && cursor.x !== null && cursor.y !== null) {
@@ -23,7 +23,7 @@ export const TextHoverEffect = ({
       setMaskPosition({
         cx: `${cxPercentage}%`,
         cy: `${cyPercentage}%`,
-        r: "40%", // ✅ Expand the radius so it covers the whole text on hover
+        r: "50%", // ✅ Expanded hover radius to ensure full coverage
       })
     }
   }, [cursor])
@@ -41,30 +41,30 @@ export const TextHoverEffect = ({
       className="select-none"
     >
       <defs>
-        {/* ✅ Changed hover effect to pastel red */}
+        {/* ✅ Stronger pastel red hover effect */}
         <linearGradient id="textGradient" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="white" />
-          <stop offset="50%" stopColor="#FFB6C1" /> {/* Pastel Red (LightPink) */}
-          <stop offset="100%" stopColor="#FF9999" /> {/* Soft Coral */}
+          <stop offset="0%" stopColor="#FF8080" /> {/* Soft Red */}
+          <stop offset="50%" stopColor="#FF6666" /> {/* Stronger Pastel Red */}
+          <stop offset="100%" stopColor="#FF4D4D" /> {/* Deeper Coral Red */}
         </linearGradient>
 
-        {/* ✅ Increased reveal radius for better visibility */}
+        {/* ✅ Expanded reveal area for better hover effect */}
         <radialGradient id="revealMask" gradientUnits="userSpaceOnUse">
           <motion.stop
             offset="0%"
             stopColor="white"
             animate={{ cx: maskPosition.cx, cy: maskPosition.cy, r: maskPosition.r }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+            transition={{ duration: duration, ease: "easeOut" }}
           />
           <stop offset="100%" stopColor="black" />
         </radialGradient>
 
-        {/* ✅ Ensure mask fully reveals the text */}
+        {/* ✅ Ensure full coverage of the entire word */}
         <mask id="textMask">
           <motion.circle
             cx="50%"
             cy="50%"
-            r="15%" // ✅ Default radius is smaller
+            r="25%" // ✅ Increased starting size
             fill="url(#revealMask)"
             animate={{ cx: maskPosition.cx, cy: maskPosition.cy, r: maskPosition.r }}
             transition={{ duration: 0.3, ease: "easeOut" }}
@@ -72,7 +72,7 @@ export const TextHoverEffect = ({
         </mask>
       </defs>
 
-      {/* ✅ Stroke to make sure text is always readable */}
+      {/* ✅ White stroke ensures text is always visible */}
       <motion.text
         x="50%"
         y="50%"
@@ -93,7 +93,7 @@ export const TextHoverEffect = ({
         {text}
       </motion.text>
 
-      {/* ✅ Hover Effect: Now pastel red */}
+      {/* ✅ More visible hover effect */}
       <text
         x="50%"
         y="50%"
