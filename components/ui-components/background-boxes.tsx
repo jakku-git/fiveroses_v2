@@ -14,7 +14,7 @@ export const BackgroundBoxes = () => {
   const cols = 20
 
   const generateRandomColor = () => {
-    const colors = ["#FF5F6D", "#FFC371", "#FF9A8B", "#FF6A88", "#FF99AC, #FF7F50, #FFB6C1, #FFDAB9, #F28C8C,#FDA7DC, #5BCEFA, #3A86FF, #00A9FF, #6EC6FF, #89CFF0, #9B5DE5, #D883FF, #C77DFF, #A064FF, #BE90FF"]
+    const colors = ["#FF5F6D", "#FFC371", "#FF9A8B", "#FF6A88", "#FF99AC, #FF7F50, #FFB6C1, #FFDAB9, #F28C8C, #FDA7DC, #5BCEFA, #3A86FF, #00A9FF, #6EC6FF, #89CFF0, #9B5DE5, #D883FF, #C77DFF, #A064FF, #BE90FF"]
     return colors[Math.floor(Math.random() * colors.length)]
   }
 
