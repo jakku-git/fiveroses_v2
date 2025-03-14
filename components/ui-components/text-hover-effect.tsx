@@ -40,26 +40,25 @@ export const TextHoverEffect = ({
       className="select-none"
     >
       <defs>
-        {/* ✅ Improved color contrast for better visibility */}
+        {/* ✅ Better color contrast for visibility */}
         <linearGradient id="textGradient" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#FFFFFF" /> {/* White */}
-          <stop offset="25%" stopColor="#FFD700" /> {/* Gold */}
-          <stop offset="50%" stopColor="#FF4500" /> {/* OrangeRed */}
-          <stop offset="75%" stopColor="#00BFFF" /> {/* DeepSkyBlue */}
-          <stop offset="100%" stopColor="#FF69B4" /> {/* HotPink */}
+          <stop offset="0%" stopColor="white" />
+          <stop offset="50%" stopColor="cyan" />
+          <stop offset="100%" stopColor="hotpink" />
         </linearGradient>
 
-        {/* ✅ Fixed reveal mask animation */}
+        {/* ✅ Smooth radial effect */}
         <radialGradient id="revealMask" gradientUnits="userSpaceOnUse">
           <motion.stop
             offset="0%"
             stopColor="white"
             animate={{ cx: maskPosition.cx, cy: maskPosition.cy }}
-            transition={{ duration: duration, ease: "easeOut" }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           />
           <stop offset="100%" stopColor="black" />
         </radialGradient>
 
+        {/* ✅ Fixed: The mask now moves with the cursor */}
         <mask id="textMask">
           <motion.rect
             x="0"
@@ -73,37 +72,37 @@ export const TextHoverEffect = ({
         </mask>
       </defs>
 
-      {/* ✅ Text Outline to Ensure Visibility */}
+      {/* ✅ Adjusted size so "fiveroses" fits properly */}
       <motion.text
         x="50%"
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="1"
-        className="font-[helvetica] font-bold fill-transparent text-6xl md:text-7xl stroke-white drop-shadow-lg"
+        className="font-[helvetica] font-bold fill-transparent text-4xl md:text-5xl stroke-white drop-shadow-lg"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
           strokeDasharray: 1000,
         }}
         transition={{
-          duration: 4,
+          duration: 3,
           ease: "easeInOut",
         }}
       >
         {text}
       </motion.text>
 
-      {/* ✅ Hover Effect Applied */}
+      {/* ✅ Hover Effect: Gradient fills the text */}
       <text
         x="50%"
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
         stroke="url(#textGradient)"
-        strokeWidth="0.7"
+        strokeWidth="0.5"
         mask="url(#textMask)"
-        className="font-[helvetica] font-bold text-6xl md:text-7xl"
+        className="font-[helvetica] font-bold text-4xl md:text-5xl"
       >
         {text}
       </text>
