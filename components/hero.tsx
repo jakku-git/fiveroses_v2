@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef, useEffect } from "react"
-import Image from "next/image"
 import { motion } from "framer-motion"
 
 export function Hero() {
@@ -19,10 +18,10 @@ export function Hero() {
       const xPercent = x / rect.width
       const yPercent = y / rect.height
 
-      const images = containerRef.current.querySelectorAll(".hero-image")
-      images.forEach((img, index) => {
+      const images = containerRef.current.querySelectorAll(".hero-video")
+      images.forEach((video, index) => {
         const factor = (index + 1) * 10
-        ;(img as HTMLElement).style.transform =
+        ;(video as HTMLElement).style.transform =
           `translate(${(xPercent - 0.5) * factor}px, ${(yPercent - 0.5) * factor}px)`
       })
     }
@@ -36,36 +35,40 @@ export function Hero() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black z-10" />
         <div className="grid grid-cols-3 h-full">
+          {/** Replace each video container **/}
           <div className="relative overflow-hidden">
-            <div className="hero-image absolute inset-0 transition-transform duration-500 ease-out">
-              <Image
-                src="/11922005_2160_3840_24fps.mp4?height=800&width=600"
-                alt="Creative visual"
-                fill
-                className="object-cover"
-                priority
+            <div className="hero-video absolute inset-0 transition-transform duration-500 ease-out">
+              <video
+                src="/11922005_2160_3840_24fps.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="object-cover w-full h-full"
               />
             </div>
           </div>
           <div className="relative overflow-hidden">
-            <div className="hero-image absolute inset-0 transition-transform duration-500 ease-out">
-              <Image
-                src="/11922005_2160_3840_24fps.mp4?height=800&width=600"
-                alt="Creative visual"
-                fill
-                className="object-cover"
-                priority
+            <div className="hero-video absolute inset-0 transition-transform duration-500 ease-out">
+              <video
+                src="/11922005_2160_3840_24fps.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="object-cover w-full h-full"
               />
             </div>
           </div>
           <div className="relative overflow-hidden">
-            <div className="hero-image absolute inset-0 transition-transform duration-500 ease-out">
-              <Image
-                src="/11922005_2160_3840_24fps.mp4?height=800&width=600"
-                alt="Creative visual"
-                fill
-                className="object-cover"
-                priority
+            <div className="hero-video absolute inset-0 transition-transform duration-500 ease-out">
+              <video
+                src="/11922005_2160_3840_24fps.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="object-cover w-full h-full"
               />
             </div>
           </div>
@@ -95,4 +98,3 @@ export function Hero() {
     </section>
   )
 }
-
