@@ -65,7 +65,7 @@ export const BackgroundBoxes = () => {
         {/* Replace static text with Text Generate Effect */}
         <TextGenerateEffect
           words="fiveroses"
-          className="text-5xl md:text-7xl font-bold mb-6 text-white"
+          className="text-12xl md:text-14xl font-bold mb-6 text-white"
         />
         <TextGenerateEffect
           words="a creative digital agency focused on growing brands through strategic and innovative marketing solutions."
