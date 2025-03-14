@@ -13,7 +13,7 @@ export const TextHoverEffect = ({
   const svgRef = useRef<SVGSVGElement>(null)
   const [cursor, setCursor] = useState({ x: 0, y: 0 })
   const [hovered, setHovered] = useState(false)
-  const [maskPosition, setMaskPosition] = useState({ cx: "50%", cy: "50%" })
+  const [maskPosition, setMaskPosition] = useState({ cx: "50%", cy: "50%", r: "15%" }) // ✅ Increased mask radius
 
   useEffect(() => {
     if (svgRef.current && cursor.x !== null && cursor.y !== null) {
@@ -23,6 +23,7 @@ export const TextHoverEffect = ({
       setMaskPosition({
         cx: `${cxPercentage}%`,
         cy: `${cyPercentage}%`,
+        r: "40%", // ✅ Expand the radius so it covers the whole text on hover
       })
     }
   }, [cursor])
@@ -40,39 +41,38 @@ export const TextHoverEffect = ({
       className="select-none"
     >
       <defs>
-        {/* ✅ Better color contrast for visibility */}
+        {/* ✅ Bright gradient for hover effect */}
         <linearGradient id="textGradient" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="white" />
           <stop offset="50%" stopColor="cyan" />
           <stop offset="100%" stopColor="hotpink" />
         </linearGradient>
 
-        {/* ✅ Smooth radial effect */}
+        {/* ✅ Increased reveal radius for better visibility */}
         <radialGradient id="revealMask" gradientUnits="userSpaceOnUse">
           <motion.stop
             offset="0%"
             stopColor="white"
-            animate={{ cx: maskPosition.cx, cy: maskPosition.cy }}
+            animate={{ cx: maskPosition.cx, cy: maskPosition.cy, r: maskPosition.r }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           />
           <stop offset="100%" stopColor="black" />
         </radialGradient>
 
-        {/* ✅ Fixed: The mask now moves with the cursor */}
+        {/* ✅ Ensure mask fully reveals the text */}
         <mask id="textMask">
-          <motion.rect
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
+          <motion.circle
+            cx="50%"
+            cy="50%"
+            r="15%" // ✅ Default radius is smaller
             fill="url(#revealMask)"
-            animate={{ opacity: hovered ? 1 : 0 }}
-            transition={{ duration: 0.3 }}
+            animate={{ cx: maskPosition.cx, cy: maskPosition.cy, r: maskPosition.r }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
           />
         </mask>
       </defs>
 
-      {/* ✅ Adjusted size so "fiveroses" fits properly */}
+      {/* ✅ Stroke to make sure text is always readable */}
       <motion.text
         x="50%"
         y="50%"
@@ -93,7 +93,7 @@ export const TextHoverEffect = ({
         {text}
       </motion.text>
 
-      {/* ✅ Hover Effect: Gradient fills the text */}
+      {/* ✅ Hover Effect: Now fully applies to the entire text */}
       <text
         x="50%"
         y="50%"
