@@ -51,7 +51,7 @@ export function Hero() {
           <div className="relative overflow-hidden">
             <div className="hero-video absolute inset-0 transition-transform duration-500 ease-out">
               <video
-                src="/17485992-uhd_2160_2700_25fps.mp4"
+                src="https://videos.pexels.com/video-files/17485992/17485992-uhd_1440_1800_25fps.mp4"
                 autoPlay
                 loop
                 muted
@@ -63,7 +63,7 @@ export function Hero() {
           <div className="relative overflow-hidden">
             <div className="hero-video absolute inset-0 transition-transform duration-500 ease-out">
               <video
-                src="/11921993_2160_3840_30fps.mp4"
+                src="https://videos.pexels.com/video-files/18069473/18069473-sd_360_640_24fps.mp4"
                 autoPlay
                 loop
                 muted
