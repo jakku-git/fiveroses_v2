@@ -33,13 +33,13 @@ export function Hero() {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden" ref={containerRef}>
       <div className="absolute inset-0 z-0">
-        {/** Modified gradient overlay with semi-transparent final color */}
+        {/* Modified gradient overlay with semi-transparent final color */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/60 z-10" />
         <div className="grid grid-cols-3 h-full">
           <div className="relative overflow-hidden">
             <div className="hero-video absolute inset-0 transition-transform duration-500 ease-out">
               <video
-                src="/https://videos.pexels.com/video-files/18069237/18069237-uhd_1440_1440_24fps.mp4"
+                src="https://videos.pexels.com/video-files/18069237/18069237-uhd_1440_1440_24fps.mp4"
                 autoPlay
                 loop
                 muted
