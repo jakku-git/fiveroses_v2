@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { motion } from "framer-motion" // ✅ Fix import
+import { motion } from "framer-motion"
 
 export const TextHoverEffect = ({
   text,
@@ -40,15 +40,16 @@ export const TextHoverEffect = ({
       className="select-none"
     >
       <defs>
+        {/* ✅ Updated to make gradient colors brighter */}
         <linearGradient id="textGradient" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="#FFD700" /> {/* Gold */}
-          <stop offset="25%" stopColor="#FF6347" /> {/* Tomato */}
-          <stop offset="50%" stopColor="#1E90FF" /> {/* DodgerBlue */}
-          <stop offset="75%" stopColor="#00CED1" /> {/* DarkTurquoise */}
-          <stop offset="100%" stopColor="#8A2BE2" /> {/* BlueViolet */}
+          <stop offset="25%" stopColor="#FF4500" /> {/* OrangeRed */}
+          <stop offset="50%" stopColor="#00BFFF" /> {/* DeepSkyBlue */}
+          <stop offset="75%" stopColor="#7CFC00" /> {/* LawnGreen */}
+          <stop offset="100%" stopColor="#FF69B4" /> {/* HotPink */}
         </linearGradient>
 
-        {/* ✅ Fixed: Directly animate mask position */}
+        {/* ✅ Bright radial glow effect */}
         <radialGradient id="revealMask" gradientUnits="userSpaceOnUse">
           <motion.stop
             offset="0%"
@@ -64,14 +65,14 @@ export const TextHoverEffect = ({
         </mask>
       </defs>
 
-      {/* Text Outline */}
+      {/* ✅ Added glow effect to make text visible */}
       <motion.text
         x="50%"
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
-        strokeWidth="0.5"
-        className="font-[helvetica] font-bold fill-transparent text-8xl stroke-neutral-200 dark:stroke-neutral-800"
+        strokeWidth="1"
+        className="font-[helvetica] font-bold fill-transparent text-8xl stroke-white drop-shadow-lg"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
@@ -85,14 +86,14 @@ export const TextHoverEffect = ({
         {text}
       </motion.text>
 
-      {/* Masked Text */}
+      {/* ✅ Gradient-filled masked text */}
       <text
         x="50%"
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
         stroke="url(#textGradient)"
-        strokeWidth="0.5"
+        strokeWidth="0.7"
         mask="url(#textMask)"
         className="font-[helvetica] font-bold fill-transparent text-8xl"
       >
