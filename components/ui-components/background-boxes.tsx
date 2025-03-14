@@ -15,7 +15,7 @@ export const BackgroundBoxes = () => {
   const cols = 20
 
   const generateRandomColor = () => {
-    const colors = ["#FF5F6D", "#FFC371", "#FF9A8B", "#FF6A88", "#FF99AC", "#FF7F50", "#FFB6C1", "#FFDAB9", "#F28C8C", "#FDA7DC", "#5BCEFA", "#3A86FF", "#00A9FF", "#6EC6FF", "#89CFF0", "#9B5DE5", "#D883FF", "#C77DFF", "#A064FF", "#BE90FF"]
+    const colors = ["#FF5F6D", "#FFC371", "#FF9A8B", "#FF6A88", "#FF99AC"]
     return colors[Math.floor(Math.random() * colors.length)]
   }
 
@@ -65,7 +65,7 @@ export const BackgroundBoxes = () => {
         {/* Replace static text with Text Generate Effect */}
         <TextGenerateEffect
           words="fiveroses"
-          className="text-3xl md:text-5xl font-bold mb-6 text-white"
+          className="text-5xl md:text-7xl font-bold mb-6 text-white"
         />
         <TextGenerateEffect
           words="a creative digital agency focused on growing brands through strategic and innovative marketing solutions."
