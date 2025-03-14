@@ -88,17 +88,18 @@ export const TextHoverEffect = ({
 
       {/* ✅ Gradient-filled masked text */}
       <text
-        x="50%"
-        y="50%"
-        textAnchor="middle"
-        dominantBaseline="middle"
-        stroke="url(#textGradient)"
-        strokeWidth="0.7"
-        mask="url(#textMask)"
-        className="font-[helvetica] font-bold fill-transparent text-8xl"
-      >
-        {text}
-      </text>
+  x="50%"
+  y="50%"
+  textAnchor="middle"
+  dominantBaseline="middle"
+  stroke="white" // ✅ Force white stroke
+  fill="white" // ✅ Force white fill
+  strokeWidth="0.7"
+  mask="url(#textMask)"
+  className="font-[helvetica] font-bold text-8xl bg-red-500" // ✅ TEMP background color
+>
+  {text}
+</text>
     </svg>
   )
 }
