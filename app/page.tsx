@@ -19,9 +19,9 @@ import EvervaultBackground from "@/components/ui-components/evervault-background
 
 export default function Home() {
   return (
-    <main style={{ background: "transparent" }} className="relative min-h-screen text-white overflow-hidden">
-      {/* Render the evervault background with a very low z-index */}
-      <EvervaultBackground />
+    <main className="relative min-h-screen bg-transparent text-white overflow-hidden">
+      {/* Full-screen Evervault background */}
+      <EvervaultBackground text="Evervault" />
 
       <Navbar />
       <Hero />
