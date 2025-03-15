@@ -48,7 +48,6 @@ export const BentoGrid = () => {
       {services.map((service, i) => (
         <motion.div
           key={i}
-          className={`bg-black border border-white/10 rounded-xl p-6 ${service.className}`}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: i * 0.1 }}
@@ -59,14 +58,20 @@ export const BentoGrid = () => {
             borderColor: "rgba(255, 95, 109, 0.3)",
           }}
         >
-          <div className="flex flex-col h-full">
-            <div className="mb-4">{service.icon}</div>
-            <h3 className="text-xl font-bold mb-2 text-white">{service.title}</h3>
-            <p className="text-white/70 text-sm flex-grow">{service.description}</p>
+          <div className={`relative ${service.className}`}>
+            {/* Animated gradient background */}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 animate-gradient-xy" />
+            {/* Inner content with solid black background */}
+            <div className="relative bg-black border border-white/10 rounded-xl p-6">
+              <div className="flex flex-col h-full">
+                <div className="mb-4">{service.icon}</div>
+                <h3 className="text-xl font-bold mb-2 text-white">{service.title}</h3>
+                <p className="text-white/70 text-sm flex-grow">{service.description}</p>
+              </div>
+            </div>
           </div>
         </motion.div>
       ))}
     </div>
   )
 }
-
