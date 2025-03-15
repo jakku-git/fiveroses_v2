@@ -7,48 +7,51 @@ export const BentoGrid = () => {
   const services = [
     {
       title: "Web Development",
-      description: "Building innovative, responsive, fast, and user-friendly websites and web applications.",
+      description:
+        "Building innovative, responsive, fast, and user-friendly websites and web applications.",
       icon: <Code className="h-8 w-8 text-rose-400" />,
       className: "md:col-span-2",
     },
     {
       title: "Branding",
-      description: "Developing unique brand identities that resonate with your target audience.",
+      description:
+        "Developing unique brand identities that resonate with your target audience.",
       icon: <Palette className="h-8 w-8 text-rose-400" />,
       className: "md:col-span-1",
     },
     {
       title: "Optimization",
-      description: "Enhancing website speed and performance for better user experience and SEO.",
+      description:
+        "Enhancing website speed and performance for better user experience and SEO.",
       icon: <Globe className="h-8 w-8 text-rose-400" />,
       className: "md:col-span-1",
     },
     {
       title: "Strategy",
-      description: "Crafting digital strategies that align with your business goals and objectives.",
+      description:
+        "Crafting digital strategies that align with your business goals and objectives.",
       icon: <Lightbulb className="h-8 w-8 text-rose-400" />,
       className: "md:col-span-1",
     },
     {
       title: "Digital Marketing",
-      description: "Driving growth through targeted digital marketing campaigns and SEO optimization.",
+      description:
+        "Driving growth through targeted digital marketing campaigns and SEO optimization.",
       icon: <BarChart className="h-8 w-8 text-rose-400" />,
       className: "md:col-span-1",
     },
     {
       title: "Performance Optimization",
-      description: "Enhancing website speed and performance for better user experience and SEO.",
+      description:
+        "Enhancing website speed and performance for better user experience and SEO.",
       icon: <Zap className="h-8 w-8 text-rose-400" />,
       className: "md:col-span-2",
     },
   ]
 
   return (
-    <section className="relative w-full overflow-hidden py-20">
-      {/* Animated gradient background covering the entire section */}
-      <div className="absolute inset-0 animate-gradient-xy bg-gradient-to-r from-purple-500 via-pink-500 to-red-500" />
-
-      {/* Content container (placed above the gradient) */}
+    <section className="w-full py-20 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 animate-gradient-xy overflow-hidden">
+      {/* Inner container for centered content */}
       <div className="relative container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           {services.map((service, i) => (
@@ -68,8 +71,12 @@ export const BentoGrid = () => {
                 <div className="bg-black border border-white/10 rounded-xl p-6">
                   <div className="flex flex-col h-full">
                     <div className="mb-4">{service.icon}</div>
-                    <h3 className="text-xl font-bold mb-2 text-white">{service.title}</h3>
-                    <p className="text-white/70 text-sm flex-grow">{service.description}</p>
+                    <h3 className="text-xl font-bold mb-2 text-white">
+                      {service.title}
+                    </h3>
+                    <p className="text-white/70 text-sm flex-grow">
+                      {service.description}
+                    </p>
                   </div>
                 </div>
               </div>
