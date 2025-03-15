@@ -17,15 +17,7 @@ import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { Footer } from "@/components/footer";
 
-type AnimatedTextProps = {
-  text: string;
-  duration?: number;
-  className?: string;
-};
 
-const AnimatedText = ({ text, duration = 0.5, className = "" }: AnimatedTextProps) => {
-  return <div className={className}>{text} (duration: {duration})</div>;
-};
 
 type MousePos = { x: number; y: number };
 
@@ -68,9 +60,6 @@ export default function Home() {
     <main className="min-h-screen bg-black text-white overflow-hidden">
       <Navbar />
       <Hero />
-
-      {/* Example usage of AnimatedText */}
-      <AnimatedText text="Welcome to Our Services" className="text-center text-3xl mb-8" />
 
       <section id="about" className="py-20">
         <div className="container mx-auto px-4">
