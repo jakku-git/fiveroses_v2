@@ -27,7 +27,7 @@ export default function EvervaultBackground() {
   const style = { maskImage, WebkitMaskImage: maskImage };
 
   return (
-    <div onMouseMove={onMouseMove} className="fixed inset-0 z-[-10]">
+    <div onMouseMove={onMouseMove} className="fixed inset-0 z-[-100]">
       <div className="absolute inset-0">
         <CardPattern style={style} randomString={randomString} />
       </div>

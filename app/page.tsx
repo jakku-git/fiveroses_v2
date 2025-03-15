@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { BackgroundBoxes } from "@/components/ui-components/background-boxes";
-import { ThreeDCard } from "@/components/ui-components/3d-card";
+import { ThreeDCard } from "@/components/ui-components/threeD-card";
 import { AppleCardsCarousel } from "@/components/ui-components/apple-cards-carousel";
 import { BentoGrid } from "@/components/ui-components/bento-grid";
 import { CanvasReveal } from "@/components/ui-components/canvas-reveal";
@@ -19,10 +19,10 @@ import EvervaultBackground from "@/components/ui-components/evervault-background
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-transparent text-white overflow-hidden">
-      {/* Full-screen interactive background */}
+    <main style={{ background: "transparent" }} className="relative min-h-screen text-white overflow-hidden">
+      {/* Render the evervault background with a very low z-index */}
       <EvervaultBackground />
-      
+
       <Navbar />
       <Hero />
 
