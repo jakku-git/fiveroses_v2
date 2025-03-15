@@ -17,24 +17,13 @@ import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { Footer } from "@/components/footer";
 
-
-
 type MousePos = { x: number; y: number };
 
 type InteractiveGradientBackgroundProps = {
   mousePos: MousePos;
 };
 
-/**
- * InteractiveGradientBackground
- *
- * This component renders a full-edge, continuously animated gradient background
- * using the CSS animation defined in globals.css (.animate-gradient-xy). It also applies
- * an interactive translate effect (using Framer Motion) based on the mouse position.
- */
 const InteractiveGradientBackground = ({ mousePos }: InteractiveGradientBackgroundProps) => {
-  // Compute a subtle offset based on the mouse position.
-  // Multiply by a small factor (0.05) for a gentle parallax effect.
   const offsetX = useSpring(mousePos.x * 0.05, { stiffness: 100, damping: 20 });
   const offsetY = useSpring(mousePos.y * 0.05, { stiffness: 100, damping: 20 });
   const transform = useTransform([offsetX, offsetY], ([x, y]) => `translate(${x}px, ${y}px)`);
@@ -44,7 +33,6 @@ const InteractiveGradientBackground = ({ mousePos }: InteractiveGradientBackgrou
       className="absolute inset-0 animate-gradient-xy"
       style={{
         transform,
-        // The CSS animation from globals.css is applied via the class.
         background: "linear-gradient(45deg, #7e5bef, #ff49db, #ff7849)",
         backgroundSize: "200% 200%",
       }}
@@ -53,7 +41,6 @@ const InteractiveGradientBackground = ({ mousePos }: InteractiveGradientBackgrou
 };
 
 export default function Home() {
-  // Track mouse position for the interactive background.
   const [mousePos, setMousePos] = useState<MousePos>({ x: 0, y: 0 });
 
   return (
@@ -61,22 +48,21 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-      <section id="about" className="py-20">
-        <div className="container mx-auto px-4">
+      <section id="about" className="relative py-20">
+        {/* Full-width background */}
+        <BackgroundBoxes />
+        <div className="container mx-auto px-4 relative z-40">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">About Us</h2>
-          <BackgroundBoxes />
+          {/* Add additional About Us content here */}
         </div>
       </section>
 
-      {/* "Our Services" Section with full-width interactive gradient background */}
       <section
         id="services"
         className="relative py-20 overflow-hidden"
         onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
       >
-        {/* The interactive gradient background sits edge-to-edge */}
         <InteractiveGradientBackground mousePos={mousePos} />
-        {/* Content container remains centered and sits above the gradient */}
         <div className="relative container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Services</h2>
           <BentoGrid />
