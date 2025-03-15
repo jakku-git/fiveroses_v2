@@ -1,37 +1,66 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { motion, stagger, useAnimate } from "motion/react";
+import { cn } from "@/lib/utils";
 
-const headlineText = "BRING YOUR IDEAS ALIVE";
+export const TextGenerateEffect = ({
+  words,
+  className,
+  filter = true,
+  duration = 0.5,
+}: {
+  words: string;
+  className?: string;
+  filter?: boolean;
+  duration?: number;
+}) => {
+  const [scope, animate] = useAnimate();
+  let wordsArray = words.split(" ");
+  useEffect(() => {
+    animate(
+      "span",
+      {
+        opacity: 1,
+        filter: filter ? "blur(0px)" : "none",
+      },
+      {
+        duration: duration,
+        delay: stagger(0.2),
+        repeat: Infinity,
+        repeatDelay: 0.3, // Pause for a tiny moment before looping again
+      }
+    );
+  }, [scope.current]);
 
-const AnimatedHeadline = () => {
+  const renderWords = () => {
+    return (
+      <motion.div ref={scope}>
+        {wordsArray.map((word, idx) => {
+          return (
+            <motion.span
+              key={word + idx}
+              className="dark:text-white text-black opacity-0"
+              style={{
+                filter: filter ? "blur(10px)" : "none",
+              }}
+            >
+              {word}{" "}
+            </motion.span>
+          );
+        })}
+      </motion.div>
+    );
+  };
+
   return (
-    <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white">
-      {headlineText.split("").map((char, index) => {
-        // Render a non-animated space to preserve spacing.
-        if (char === " ") {
-          return <span key={index}>&nbsp;</span>;
-        }
-        return (
-          <motion.span
-            key={index}
-            className="inline-block"
-            initial={{ opacity: 0, y: 0 }}
-            animate={{ opacity: [0, 1, 1, 0], y: [0, 0, 0, -5] }}
-            transition={{
-              delay: index * 0.15,
-              duration: 2,
-              repeat: Infinity,
-              repeatDelay: 1,
-              ease: "easeInOut",
-            }}
-          >
-            {char}
-          </motion.span>
-        );
-      })}
-    </h1>
+    <div className={cn("font-bold", className)}>
+      <div className="mt-4">
+        <div className="dark:text-white text-black text-2xl leading-snug tracking-wide">
+          {renderWords()}
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -109,7 +138,7 @@ export function Hero() {
       </div>
 
       <div className="container mx-auto px-4 relative z-20 text-center">
-        <AnimatedHeadline />
+        <TextGenerateEffect words="BRING YOUR IDEAS ALIVE" className="text-5xl md:text-7xl lg:text-8xl" />
         <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 text-white/80">
           YOUR BRAND'S STORY STARTS HERE
         </p>
