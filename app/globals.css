@@ -2,21 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Only include custom utilities that are used by the animated gradient component */
 @layer utilities {
-  .border-border {
-    border-color: hsl(var(--border));
-  }
-  .bg-background {
-    background-color: hsl(var(--background));
-  }
-  .text-foreground {
-    color: hsl(var(--foreground));
+  .animate-gradient-xy {
+    background-size: 200% 200%;
+    animation: gradient-xy 5s ease infinite;
   }
 }
 
+/* Retain your original CSS variables (adjust values as needed) */
 :root {
-  --background: 0 0% 3.9%;  /* Adjust if needed */
-  --foreground: 0 0% 98%;    /* Adjust if needed */
+  --background: 210 50% 95%;  /* Change these values to match your design */
+  --foreground: 210 20% 20%;
   --card: 0 0% 3.9%;
   --card-foreground: 0 0% 98%;
   --popover: 0 0% 3.9%;
@@ -38,6 +35,7 @@
 }
 
 .dark {
+  /* Update these to match your dark mode design if necessary */
   --background: 0 0% 3.9%;
   --foreground: 0 0% 98%;
   --card: 0 0% 3.9%;
@@ -59,24 +57,17 @@
   --ring: 346.8 77.2% 49.8%;
 }
 
-body {
-  @apply bg-background text-foreground;
-}
+/* Do not force body background and text colors unless intended */
+// If you had an original design for body, leave it as it was.
+// body {
+//   @apply bg-background text-foreground;
+// }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* Optionally remove universal border styles if causing issues */
-/* 
-@layer base {
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-*/
-
-/* Animated Gradient Background CSS */
+/* Animated Gradient Background Keyframes */
 @keyframes gradient-xy {
   0% {
     background-position: 0% 50%;
@@ -87,9 +78,4 @@ html {
   100% {
     background-position: 0% 50%;
   }
-}
-
-.animate-gradient-xy {
-  background-size: 200% 200%;
-  animation: gradient-xy 5s ease infinite;
 }
