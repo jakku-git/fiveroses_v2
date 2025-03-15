@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import { BackgroundBoxes } from "@/components/ui-components/background-boxes";
-import { ThreeDCard } from "@/components/ui-components/threeD-card";
+import { ThreeDCard } from "@/components/ui-components/3d-card";
 import { AppleCardsCarousel } from "@/components/ui-components/apple-cards-carousel";
 import { BackgroundGradientAnimation } from "@/components/ui-components/background-gradient-animation";
 import { BentoGrid } from "@/components/ui-components/bento-grid";
