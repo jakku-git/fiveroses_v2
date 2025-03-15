@@ -50,7 +50,7 @@ export default function Home() {
           }
         }}
       >
-        <BackgroundGradientAnimation interactive containerClassName="absolute inset-0" />
+        <BackgroundGradientAnimation mousePos={mousePos} interactive containerClassName="absolute inset-0" />
         <div className="relative container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Services</h2>
           <BentoGrid />

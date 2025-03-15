@@ -1,9 +1,15 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { motion, useSpring, useMotionTemplate } from "framer-motion";
 
+interface MousePos {
+  x: number;
+  y: number;
+}
+
 interface BackgroundGradientAnimationProps {
+  mousePos: MousePos;
   gradientBackgroundStart?: string;
   gradientBackgroundEnd?: string;
   firstColor?: string;
@@ -16,11 +22,11 @@ interface BackgroundGradientAnimationProps {
   blendingValue?: string;
   children?: React.ReactNode;
   className?: string;
-  interactive?: boolean;
   containerClassName?: string;
 }
 
 export const BackgroundGradientAnimation = ({
+  mousePos,
   gradientBackgroundStart = "rgb(108, 0, 162)",
   gradientBackgroundEnd = "rgb(0, 17, 82)",
   firstColor = "18, 113, 255",
@@ -33,18 +39,8 @@ export const BackgroundGradientAnimation = ({
   blendingValue = "hard-light",
   children,
   className,
-  interactive = true,
   containerClassName,
 }: BackgroundGradientAnimationProps) => {
-  // We'll use local state for the target mouse coordinates.
-  const [tgX, setTgX] = useState(0);
-  const [tgY, setTgY] = useState(0);
-
-  // Create motion values with a spring for smooth interpolation.
-  const motionX = useSpring(tgX, { stiffness: 100, damping: 20 });
-  const motionY = useSpring(tgY, { stiffness: 100, damping: 20 });
-  const transform = useMotionTemplate`translate(${motionX}px, ${motionY}px)`;
-
   // Set CSS variables on body for the gradient colors.
   useEffect(() => {
     document.body.style.setProperty("--gradient-background-start", gradientBackgroundStart);
@@ -57,46 +53,20 @@ export const BackgroundGradientAnimation = ({
     document.body.style.setProperty("--pointer-color", pointerColor);
     document.body.style.setProperty("--size", size);
     document.body.style.setProperty("--blending-value", blendingValue);
-  }, [
-    gradientBackgroundStart,
-    gradientBackgroundEnd,
-    firstColor,
-    secondColor,
-    thirdColor,
-    fourthColor,
-    fifthColor,
-    pointerColor,
-    size,
-    blendingValue,
-  ]);
+  }, [gradientBackgroundStart, gradientBackgroundEnd, firstColor, secondColor, thirdColor, fourthColor, fifthColor, pointerColor, size, blendingValue]);
 
-  // Use a ref so that we can get the bounding rect to compute relative mouse position.
-  const interactiveRef = useRef<HTMLDivElement>(null);
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (interactiveRef.current) {
-      const rect = interactiveRef.current.getBoundingClientRect();
-      setTgX(event.clientX - rect.left);
-      setTgY(event.clientY - rect.top);
-    }
-  };
-
-  // Detect Safari to adjust blur if needed.
-  const [isSafari, setIsSafari] = useState(false);
-  useEffect(() => {
-    setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
-  }, []);
+  // Create smooth motion values from the passed-in mousePos.
+  const motionX = useSpring(mousePos.x, { stiffness: 100, damping: 20 });
+  const motionY = useSpring(mousePos.y, { stiffness: 100, damping: 20 });
+  const transform = useMotionTemplate`translate(${motionX}px, ${motionY}px)`;
 
   return (
-    <div
-      className={cn("relative overflow-hidden pointer-events-none", containerClassName)}
-      onMouseMove={interactive ? handleMouseMove : undefined}
-      ref={interactiveRef}
-    >
+    <div className={cn("relative overflow-hidden pointer-events-none", containerClassName)}>
       <div className={cn("", className)}>{children}</div>
       <motion.div
         className={cn(
           "absolute inset-0 gradients-container blur-2xl",
-          isSafari ? "blur-2xl" : "[filter:url(#blurMe)_blur(40px)]"
+          "[filter:url(#blurMe)_blur(40px)]"
         )}
         style={{ transform }}
       >
