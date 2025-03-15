@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useSpring, useMotionTemplate } from "framer-motion";
 
 interface MousePos {
@@ -65,9 +65,9 @@ const BackgroundGradientAnimation = ({
     motionY.set(mousePos.y);
   }, [mousePos.x, mousePos.y, motionX, motionY]);
 
-  const transform = useMotionTemplate`translate(${motionX}px, ${motionY}px)`;
+  // Combine the translation with a -50% offset to center the gradient on the cursor.
+  const transform = useMotionTemplate`translate(${motionX}px, ${motionY}px) translate(-50%, -50%)`;
 
-  // Use a ref for potential future use.
   const interactiveRef = useRef<HTMLDivElement>(null);
 
   return (
