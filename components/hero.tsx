@@ -91,8 +91,15 @@ export function Hero() {
           className="text-center"
         >
           <motion.h1
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            animate={{
+              y: [0, -5, 0],
+              rotate: [0, 2, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
             className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white"
           >
             BRING YOUR IDEAS ALIVE
