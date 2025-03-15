@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react"
 import { motion } from "framer-motion"
-import { SparkleText } from "@/components/ui/SparkleText"
+import { SparkleText } from "@/components/ui-components/sparkletext"
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
