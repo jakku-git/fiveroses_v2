@@ -44,12 +44,12 @@ export const BentoGrid = () => {
   ]
 
   return (
-    <div className="relative">
-      {/* Animated gradient background for the entire section */}
+    <section className="relative w-full overflow-hidden py-20">
+      {/* Animated gradient background covering the entire section */}
       <div className="absolute inset-0 animate-gradient-xy bg-gradient-to-r from-purple-500 via-pink-500 to-red-500" />
-      
-      {/* Content container to ensure inner content stays above the gradient */}
-      <div className="relative p-6">
+
+      {/* Content container (placed above the gradient) */}
+      <div className="relative container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           {services.map((service, i) => (
             <motion.div
@@ -77,6 +77,6 @@ export const BentoGrid = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   )
 }
