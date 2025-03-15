@@ -2,6 +2,23 @@
 import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 
+interface BackgroundGradientAnimationProps {
+  gradientBackgroundStart?: string;
+  gradientBackgroundEnd?: string;
+  firstColor?: string;
+  secondColor?: string;
+  thirdColor?: string;
+  fourthColor?: string;
+  fifthColor?: string;
+  pointerColor?: string;
+  size?: string;
+  blendingValue?: string;
+  children?: React.ReactNode;
+  className?: string;
+  interactive?: boolean;
+  containerClassName?: string;
+}
+
 export const BackgroundGradientAnimation = ({
   gradientBackgroundStart = "rgb(108, 0, 162)",
   gradientBackgroundEnd = "rgb(0, 17, 82)",
@@ -17,22 +34,7 @@ export const BackgroundGradientAnimation = ({
   className,
   interactive = true,
   containerClassName,
-}: {
-  gradientBackgroundStart?: string;
-  gradientBackgroundEnd?: string;
-  firstColor?: string;
-  secondColor?: string;
-  thirdColor?: string;
-  fourthColor?: string;
-  fifthColor?: string;
-  pointerColor?: string;
-  size?: string;
-  blendingValue?: string;
-  children?: React.ReactNode;
-  className?: string;
-  interactive?: boolean;
-  containerClassName?: string;
-}) => {
+}: BackgroundGradientAnimationProps) => {
   const interactiveRef = useRef<HTMLDivElement>(null);
 
   const [curX, setCurX] = useState(0);
@@ -41,14 +43,8 @@ export const BackgroundGradientAnimation = ({
   const [tgY, setTgY] = useState(0);
 
   useEffect(() => {
-    document.body.style.setProperty(
-      "--gradient-background-start",
-      gradientBackgroundStart
-    );
-    document.body.style.setProperty(
-      "--gradient-background-end",
-      gradientBackgroundEnd
-    );
+    document.body.style.setProperty("--gradient-background-start", gradientBackgroundStart);
+    document.body.style.setProperty("--gradient-background-end", gradientBackgroundEnd);
     document.body.style.setProperty("--first-color", firstColor);
     document.body.style.setProperty("--second-color", secondColor);
     document.body.style.setProperty("--third-color", thirdColor);
@@ -57,19 +53,17 @@ export const BackgroundGradientAnimation = ({
     document.body.style.setProperty("--pointer-color", pointerColor);
     document.body.style.setProperty("--size", size);
     document.body.style.setProperty("--blending-value", blendingValue);
-  }, []);
+  }, [gradientBackgroundStart, gradientBackgroundEnd, firstColor, secondColor, thirdColor, fourthColor, fifthColor, pointerColor, size, blendingValue]);
 
   useEffect(() => {
     function move() {
       if (!interactiveRef.current) return;
-      setCurX(curX + (tgX - curX) / 20);
-      setCurY(curY + (tgY - curY) / 20);
-      interactiveRef.current.style.transform = `translate(${Math.round(
-        curX
-      )}px, ${Math.round(curY)}px)`;
+      setCurX((prev) => prev + (tgX - prev) / 20);
+      setCurY((prev) => prev + (tgY - prev) / 20);
+      interactiveRef.current.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
     }
     move();
-  }, [tgX, tgY]);
+  }, [tgX, tgY, curX, curY]);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (interactiveRef.current) {
@@ -86,7 +80,7 @@ export const BackgroundGradientAnimation = ({
 
   return (
     <div
-      className={cn("relative overflow-hidden", containerClassName)}
+      className={cn("relative overflow-hidden pointer-events-none", containerClassName)}
       onMouseMove={interactive ? handleMouseMove : undefined}
     >
       <div className={cn("", className)}>{children}</div>
