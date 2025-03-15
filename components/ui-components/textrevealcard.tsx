@@ -16,10 +16,13 @@ export const TextRevealCard = ({
   className?: string;
 }) => {
   const [widthPercentage, setWidthPercentage] = useState(0);
-  const cardRef = useRef<HTMLDivElement | any>(null);
+  const cardRef = useRef<HTMLDivElement | null>(null);
   const [left, setLeft] = useState(0);
   const [localWidth, setLocalWidth] = useState(0);
   const [isMouseOver, setIsMouseOver] = useState(false);
+
+  // You can adjust the revealFactor if you still want to limit the drag distance
+  const revealFactor = 1; // 1 means full drag distance
 
   useEffect(() => {
     if (cardRef.current) {
@@ -35,7 +38,7 @@ export const TextRevealCard = ({
     const { clientX } = event;
     if (cardRef.current) {
       const relativeX = clientX - left;
-      setWidthPercentage((relativeX / localWidth) * 100);
+      setWidthPercentage((relativeX / localWidth) * 100 * revealFactor);
     }
   }
 
@@ -51,7 +54,7 @@ export const TextRevealCard = ({
     const clientX = event.touches[0]!.clientX;
     if (cardRef.current) {
       const relativeX = clientX - left;
-      setWidthPercentage((relativeX / localWidth) * 100);
+      setWidthPercentage((relativeX / localWidth) * 100 * revealFactor);
     }
   }
 
@@ -106,13 +109,30 @@ export const TextRevealCard = ({
         ></motion.div>
 
         <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]">
-          <motion.p
-            animate={{ opacity: 1 - widthPercentage / 100 }}
-            transition={{ duration: 0.2 }}
-            className="text-4xl md:text-5xl py-10 font-bold bg-clip-text text-transparent bg-[#323238]"
-          >
-            {text}
-          </motion.p>
+          <p className="text-4xl md:text-5xl py-10 font-bold bg-clip-text text-transparent bg-[#323238]">
+            {text.split("").map((letter, i, letters) => {
+              const total = letters.length;
+              // For each letter, determine the fade start and fade end thresholds.
+              const fadeStart = (i / total) * 100;
+              const fadeRange = 20; // each letter fades out over 20% of the movement
+              let letterOpacity = 1;
+              if (widthPercentage < fadeStart) {
+                letterOpacity = 1;
+              } else if (widthPercentage > fadeStart + fadeRange) {
+                letterOpacity = 0;
+              } else {
+                letterOpacity = 1 - (widthPercentage - fadeStart) / fadeRange;
+              }
+              return (
+                <motion.span
+                  key={i}
+                  style={{ display: "inline-block", opacity: letterOpacity }}
+                >
+                  {letter}
+                </motion.span>
+              );
+            })}
+          </p>
           <MemoizedStars />
         </div>
       </div>
