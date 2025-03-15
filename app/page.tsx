@@ -1,7 +1,7 @@
 "use client";
 
 import { useSpring, useTransform, motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { BackgroundBoxes } from "@/components/ui-components/background-boxes";
 import { ThreeDCard } from "@/components/ui-components/3d-card";
 import { AppleCardsCarousel } from "@/components/ui-components/apple-cards-carousel";
@@ -18,8 +18,6 @@ import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { Footer } from "@/components/footer";
 
-
-
 type MousePos = { x: number; y: number };
 
 type InteractiveGradientBackgroundProps = {
@@ -34,8 +32,6 @@ type InteractiveGradientBackgroundProps = {
  * an interactive translate effect (using Framer Motion) based on the mouse position.
  */
 const InteractiveGradientBackground = ({ mousePos }: InteractiveGradientBackgroundProps) => {
-  // Compute a subtle offset based on the mouse position.
-  // Multiply by a small factor (0.05) for a gentle parallax effect.
   const offsetX = useSpring(mousePos.x * 0.05, { stiffness: 100, damping: 20 });
   const offsetY = useSpring(mousePos.y * 0.05, { stiffness: 100, damping: 20 });
   const transform = useTransform([offsetX, offsetY], ([x, y]) => `translate(${x}px, ${y}px)`);
@@ -45,7 +41,6 @@ const InteractiveGradientBackground = ({ mousePos }: InteractiveGradientBackgrou
       className="absolute inset-0 animate-gradient-xy"
       style={{
         transform,
-        // The CSS animation from globals.css is applied via the class.
         background: "linear-gradient(45deg, #7e5bef, #ff49db, #ff7849)",
         backgroundSize: "200% 200%",
       }}
@@ -56,6 +51,7 @@ const InteractiveGradientBackground = ({ mousePos }: InteractiveGradientBackgrou
 export default function Home() {
   // Track mouse position for the interactive background.
   const [mousePos, setMousePos] = useState<MousePos>({ x: 0, y: 0 });
+  const servicesRef = useRef<HTMLDivElement>(null);
 
   return (
     <main className="min-h-screen bg-black text-white overflow-hidden">
@@ -70,35 +66,38 @@ export default function Home() {
       </section>
 
       {/* Our Services Section with enhanced background */}
-<section
-  id="services"
-  className="relative py-20 overflow-hidden"
-  onMouseMove={(e) =>
-    setMousePos({
-      x: e.nativeEvent.offsetX,
-      y: e.nativeEvent.offsetY,
-    })
-  }
->
-  {/* Enhanced background with extra blur and interactive pointer */}
-  <BackgroundGradientAnimation interactive containerClassName="absolute inset-0" />
+      <section
+        id="services"
+        ref={servicesRef}
+        className="relative py-20 overflow-hidden"
+        onMouseMove={(e) => {
+          if (servicesRef.current) {
+            const rect = servicesRef.current.getBoundingClientRect();
+            setMousePos({
+              x: e.clientX - rect.left,
+              y: e.clientY - rect.top,
+            });
+          }
+        }}
+      >
+        {/* Enhanced background with extra blur and interactive pointer */}
+        <BackgroundGradientAnimation interactive containerClassName="absolute inset-0" />
   
-  {/* Interactive circle that follows your mouse */}
-  <motion.div
-    className="absolute w-8 h-8 rounded-full bg-white opacity-50 pointer-events-none"
-    style={{
-      top: mousePos.y - 4,
-      left: mousePos.x - 4,
-    }}
-  />
+        {/* Interactive circle that follows your mouse */}
+        <motion.div
+          className="absolute w-8 h-8 rounded-full bg-white opacity-50 pointer-events-none"
+          style={{
+            top: mousePos.y - 4,
+            left: mousePos.x - 4,
+          }}
+        />
   
-  {/* Content container remains centered above the background */}
-  <div className="relative container mx-auto px-4">
-    <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Services</h2>
-    <BentoGrid />
-  </div>
-</section>
-
+        {/* Content container remains centered above the background */}
+        <div className="relative container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Services</h2>
+          <BentoGrid />
+        </div>
+      </section>
 
       <section id="work" className="py-20">
         <div className="container mx-auto px-4">
