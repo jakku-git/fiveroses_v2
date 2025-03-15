@@ -1,36 +1,35 @@
-"use client"
+"use client";
 
-import React from "react"; 
-import { useRef, useEffect } from "react"
-import { motion } from "framer-motion"
-import { Cover } from "@/components/ui-components/cover" // ✅ Import Cover component
+import { useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Cover } from "@/components/ui-components/cover"; // ✅ Ensure correct import
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return
+      if (!containerRef.current) return;
 
-      const { clientX, clientY } = e
-      const rect = containerRef.current.getBoundingClientRect()
-      const x = clientX - rect.left
-      const y = clientY - rect.top
+      const { clientX, clientY } = e;
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
 
-      const xPercent = x / rect.width
-      const yPercent = y / rect.height
+      const xPercent = x / rect.width;
+      const yPercent = y / rect.height;
 
-      const videos = containerRef.current.querySelectorAll(".hero-video")
+      const videos = containerRef.current.querySelectorAll(".hero-video");
       videos.forEach((video, index) => {
-        const factor = (index + 1) * 10
-        ;(video as HTMLElement).style.transform =
-          `translate(${(xPercent - 0.5) * factor}px, ${(yPercent - 0.5) * factor}px)`
-      })
-    }
+        const factor = (index + 1) * 10;
+        (video as HTMLElement).style.transform =
+          `translate(${(xPercent - 0.5) * factor}px, ${(yPercent - 0.5) * factor}px)`;
+      });
+    };
 
-    document.addEventListener("mousemove", handleMouseMove)
-    return () => document.removeEventListener("mousemove", handleMouseMove)
-  }, [])
+    document.addEventListener("mousemove", handleMouseMove);
+    return () => document.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden" ref={containerRef}>
@@ -84,7 +83,21 @@ export function Hero() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white">
             BRING YOUR IDEAS <Cover>ALIVE</Cover>
           </h1>
-          <
+          <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 text-white/80">
+            YOUR BRAND'S STORY STARTS HERE
+          </p>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-rose-500 hover:bg-rose-600 text-white px-8 py-3 rounded-full text-lg font-medium transition-colors"
+          >
+            Explore Our Work
+          </motion.button>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
