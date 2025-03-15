@@ -105,7 +105,8 @@ export const TextRevealCard = ({
           className="h-40 w-[8px] bg-gradient-to-b from-transparent via-neutral-800 to-transparent absolute z-50 will-change-transform"
         ></motion.div>
 
-        <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]">
+        {/* Updated mask gradient to be a bit more translucent */}
+        <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,rgba(255,255,255,0.3),rgba(255,255,255,0.8),rgba(255,255,255,0.3))]">
           <p className="text-4xl md:text-5xl py-10 font-bold bg-clip-text text-transparent bg-[#323238]">
             {text}
           </p>
@@ -143,13 +144,13 @@ export const TextRevealCardDescription = ({
 };
 
 const Stars = () => {
-  // Increase range of motion from ±2px to ±4px.
-  const randomMove = () => Math.random() * 8 - 4;
+  // Revert to original subtle motion: between -2 and 2 pixels.
+  const randomMove = () => Math.random() * 4 - 2;
   const randomOpacity = () => Math.random();
   const random = () => Math.random();
   return (
     <div className="absolute inset-0">
-      {[...Array(240)].map((_, i) => (
+      {[...Array(480)].map((_, i) => (
         <motion.span
           key={`star-${i}`}
           animate={{
@@ -159,8 +160,8 @@ const Stars = () => {
             scale: [1, 1.2, 0],
           }}
           transition={{
-            // Increase duration: random value between 40 and 60 seconds.
-            duration: random() * 20 + 40,
+            // Revert to original duration: random value between 20 and 30 seconds.
+            duration: random() * 10 + 20,
             repeat: Infinity,
             ease: "linear",
           }}
