@@ -16,17 +16,15 @@ export const TextRevealCard = ({
   className?: string;
 }) => {
   const [widthPercentage, setWidthPercentage] = useState(0);
-  const cardRef = useRef<HTMLDivElement | null>(null);
+  const cardRef = useRef<HTMLDivElement | any>(null);
   const [left, setLeft] = useState(0);
   const [localWidth, setLocalWidth] = useState(0);
   const [isMouseOver, setIsMouseOver] = useState(false);
 
-  // Set revealFraction to 0.3: the reveal effect will complete when the mouse has moved 30% of the card's width.
-  const revealFraction = 0.3;
-
   useEffect(() => {
     if (cardRef.current) {
-      const { left, width: localWidth } = cardRef.current.getBoundingClientRect();
+      const { left, width: localWidth } =
+        cardRef.current.getBoundingClientRect();
       setLeft(left);
       setLocalWidth(localWidth);
     }
@@ -37,9 +35,7 @@ export const TextRevealCard = ({
     const { clientX } = event;
     if (cardRef.current) {
       const relativeX = clientX - left;
-      const maxRevealDistance = localWidth * revealFraction;
-      const effectiveDistance = Math.min(relativeX, maxRevealDistance);
-      setWidthPercentage((effectiveDistance / maxRevealDistance) * 100);
+      setWidthPercentage((relativeX / localWidth) * 100);
     }
   }
 
@@ -55,9 +51,7 @@ export const TextRevealCard = ({
     const clientX = event.touches[0]!.clientX;
     if (cardRef.current) {
       const relativeX = clientX - left;
-      const maxRevealDistance = localWidth * revealFraction;
-      const effectiveDistance = Math.min(relativeX, maxRevealDistance);
-      setWidthPercentage((effectiveDistance / maxRevealDistance) * 100);
+      setWidthPercentage((relativeX / localWidth) * 100);
     }
   }
 
@@ -77,6 +71,7 @@ export const TextRevealCard = ({
       )}
     >
       {children}
+
       <div className="h-40 relative flex items-center overflow-hidden">
         <motion.div
           style={{ width: "100%" }}
@@ -91,6 +86,7 @@ export const TextRevealCard = ({
                 }
           }
           transition={isMouseOver ? { duration: 0 } : { duration: 0.4 }}
+          // Set background to transparent instead of a solid color.
           className="absolute bg-transparent z-20 will-change-transform"
         >
           <p
@@ -109,6 +105,7 @@ export const TextRevealCard = ({
           transition={isMouseOver ? { duration: 0 } : { duration: 0.4 }}
           className="h-40 w-[8px] bg-gradient-to-b from-transparent via-neutral-800 to-transparent absolute z-50 will-change-transform"
         ></motion.div>
+
         <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]">
           <p className="text-4xl md:text-5xl py-10 font-bold bg-clip-text text-transparent bg-[#323238]">
             {text}
@@ -153,7 +150,7 @@ const Stars = () => {
   const random = () => Math.random();
   return (
     <div className="absolute inset-0">
-      {[...Array(240)].map((_, i) => (
+      {[...Array(480)].map((_, i) => (
         <motion.span
           key={`star-${i}`}
           animate={{
