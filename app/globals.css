@@ -6,6 +6,12 @@
   .border-border {
     border-color: hsl(var(--border));
   }
+  .bg-background {
+    background-color: hsl(var(--background));
+  }
+  .text-foreground {
+    color: hsl(var(--foreground));
+  }
 }
 
 :root {
