@@ -1,63 +1,45 @@
 "use client";
 
-import { useEffect } from "react";
-import { motion, stagger, useAnimate } from "motion/react";
+import { useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
+// TextGenerateEffect using Framer Motion
 export const TextGenerateEffect = ({
   words,
   className,
-  filter = true,
   duration = 0.5,
 }: {
   words: string;
   className?: string;
-  filter?: boolean;
   duration?: number;
 }) => {
-  const [scope, animate] = useAnimate();
-  let wordsArray = words.split(" ");
-  useEffect(() => {
-    animate(
-      "span",
-      {
-        opacity: 1,
-        filter: filter ? "blur(0px)" : "none",
-      },
-      {
-        duration: duration,
-        delay: stagger(0.2),
-        repeat: Infinity,
-        repeatDelay: 0.3, // Pause for a tiny moment before looping again
-      }
-    );
-  }, [scope.current]);
-
-  const renderWords = () => {
-    return (
-      <motion.div ref={scope}>
-        {wordsArray.map((word, idx) => {
-          return (
-            <motion.span
-              key={word + idx}
-              className="dark:text-white text-black opacity-0"
-              style={{
-                filter: filter ? "blur(10px)" : "none",
-              }}
-            >
-              {word}{" "}
-            </motion.span>
-          );
-        })}
-      </motion.div>
-    );
-  };
-
+  // Split the headline by spaces
+  const wordsArray = words.split(" ");
   return (
     <div className={cn("font-bold", className)}>
       <div className="mt-4">
         <div className="dark:text-white text-black text-2xl leading-snug tracking-wide">
-          {renderWords()}
+          {wordsArray.map((word, idx) => (
+            <motion.span
+              key={word + idx}
+              className="inline-block opacity-0"
+              initial={{ opacity: 0, filter: "blur(10px)" }}
+              animate={{
+                opacity: [0, 1, 1, 0],
+                filter: ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"],
+              }}
+              transition={{
+                duration: duration,
+                delay: idx * 0.2,
+                repeat: Infinity,
+                repeatDelay: 0.3, // Pause briefly before looping again
+                ease: "easeInOut",
+              }}
+            >
+              {word}{" "}
+            </motion.span>
+          ))}
         </div>
       </div>
     </div>
