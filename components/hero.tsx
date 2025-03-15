@@ -2,7 +2,6 @@
 
 import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Cover } from "@/components/ui-components/cover"; // ✅ Ensuring proper import
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -85,7 +84,7 @@ export function Hero() {
           className="text-center"
         >
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white">
-            BRING YOUR IDEAS <Cover>ALIVE</Cover>
+            BRING YOUR IDEAS ALIVE
           </h1>
           <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 text-white/80">
             YOUR BRAND'S STORY STARTS HERE
