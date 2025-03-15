@@ -7,19 +7,19 @@ export const BentoGrid = () => {
   const services = [
     {
       title: "Web Development",
-      description: "Building responsive, fast, and user-friendly websites and web applications.",
+      description: "Building innovative, responsive, fast, and user-friendly websites and web applications.",
       icon: <Code className="h-8 w-8 text-rose-400" />,
       className: "md:col-span-2",
     },
     {
-      title: "UI/UX Design",
-      description: "Creating intuitive and engaging user experiences with beautiful interfaces.",
+      title: "Branding",
+      description: "Developing unique brand identities that resonate with your target audience.",
       icon: <Palette className="h-8 w-8 text-rose-400" />,
       className: "md:col-span-1",
     },
     {
-      title: "Branding",
-      description: "Developing unique brand identities that resonate with your target audience.",
+      title: "Optimization",
+      description: "Enhancing website speed and performance for better user experience and SEO.",
       icon: <Globe className="h-8 w-8 text-rose-400" />,
       className: "md:col-span-1",
     },
