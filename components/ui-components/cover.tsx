@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { cn } from "@/lib/utils"; // ✅ Ensure this is correctly imported!
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils"; // ✅ Ensure correct import
 
 export const Cover = ({
   children,
@@ -18,14 +18,14 @@ export const Cover = ({
   useEffect(() => {
     if (ref.current) {
       const height = ref.current.clientHeight ?? 0;
-      const numberOfBeams = Math.floor(height / 8);
+      const numberOfBeams = Math.floor(height / 6);
       const positions = Array.from(
         { length: numberOfBeams },
         (_, i) => (i + 1) * (height / (numberOfBeams + 1))
       );
       setBeamPositions(positions);
     }
-  }, []); // ✅ Fixed dependency array
+  }, []); // ✅ Prevent unnecessary re-renders
 
   return (
     <div
@@ -33,36 +33,54 @@ export const Cover = ({
       onMouseLeave={() => setHovered(false)}
       ref={ref}
       className={cn(
-        "relative group inline-block bg-neutral-900 px-3 py-2 transition duration-200 rounded-md overflow-hidden",
+        "relative group inline-block px-4 py-2 transition-all duration-300 rounded-lg overflow-hidden border border-neutral-700 bg-neutral-900",
         className
       )}
     >
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="absolute inset-0 h-full w-full overflow-hidden"
-          >
+      {/* ✅ Fast-Moving Beams for True Aceternity Effect */}
+      {hovered && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="absolute inset-0 h-full w-full overflow-hidden"
+        >
+          {beamPositions.map((position, index) => (
             <motion.div
-              animate={{ translateX: ["-50%", "0%"] }}
-              transition={{ duration: 10, ease: "linear", repeat: Infinity }}
-              className="absolute inset-0"
-            >
-              {beamPositions.map((position, index) => (
-                <div
-                  key={index}
-                  className="absolute left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-white to-transparent opacity-50"
-                  style={{ top: position }}
-                />
-              ))}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <div className="relative z-10 text-white font-bold">{children}</div>
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.2, 1, 0.2], x: ["-50%", "50%"] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: index * 0.15,
+                ease: "easeInOut",
+              }}
+              className="absolute left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#ffffff90] to-transparent opacity-50"
+              style={{ top: position }}
+            />
+          ))}
+        </motion.div>
+      )}
+
+      {/* ✅ Text Content with Smooth Blend-in Effect */}
+      <motion.div
+        initial={{ opacity: 1 }}
+        animate={{ opacity: hovered ? 0.9 : 1 }}
+        transition={{ duration: 0.3 }}
+        className="relative z-10 text-white font-bold text-xl tracking-wide"
+      >
+        {children}
+      </motion.div>
+
+      {/* ✅ Outer Glow to Make Effect Stand Out */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: hovered ? 0.5 : 0 }}
+        transition={{ duration: 0.4 }}
+        className="absolute inset-0 rounded-lg bg-neutral-700 opacity-20 blur-lg"
+      />
     </div>
   );
 };
