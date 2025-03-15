@@ -16,34 +16,26 @@ export const TextRevealCard = ({
   className?: string;
 }) => {
   const [widthPercentage, setWidthPercentage] = useState(0);
-  const cardRef = useRef<HTMLDivElement | null>(null);
-  // New ref for the inner reveal container.
-  const revealContainerRef = useRef<HTMLDivElement | null>(null);
+  const cardRef = useRef<HTMLDivElement | any>(null);
   const [left, setLeft] = useState(0);
-  const [revealWidth, setRevealWidth] = useState(0);
+  const [localWidth, setLocalWidth] = useState(0);
   const [isMouseOver, setIsMouseOver] = useState(false);
 
-  // In this example, we let the reveal effect complete once the mouse has moved the full width of the reveal container.
-  // (Since we are making that container smaller, the effect will "stop" sooner.)
-  const revealFraction = 1; // full width of the reveal container
-
   useEffect(() => {
-    if (cardRef.current && revealContainerRef.current) {
-      const { left } = cardRef.current.getBoundingClientRect();
-      const { width } = revealContainerRef.current.getBoundingClientRect();
+    if (cardRef.current) {
+      const { left, width: localWidth } =
+        cardRef.current.getBoundingClientRect();
       setLeft(left);
-      setRevealWidth(width);
+      setLocalWidth(localWidth);
     }
   }, []);
 
   function mouseMoveHandler(event: any) {
     event.preventDefault();
     const { clientX } = event;
-    if (revealContainerRef.current) {
+    if (cardRef.current) {
       const relativeX = clientX - left;
-      const maxRevealDistance = revealWidth * revealFraction;
-      const effectiveDistance = Math.min(relativeX, maxRevealDistance);
-      setWidthPercentage((effectiveDistance / maxRevealDistance) * 100);
+      setWidthPercentage((relativeX / localWidth) * 100);
     }
   }
 
@@ -57,11 +49,9 @@ export const TextRevealCard = ({
   function touchMoveHandler(event: React.TouchEvent<HTMLDivElement>) {
     event.preventDefault();
     const clientX = event.touches[0]!.clientX;
-    if (revealContainerRef.current) {
+    if (cardRef.current) {
       const relativeX = clientX - left;
-      const maxRevealDistance = revealWidth * revealFraction;
-      const effectiveDistance = Math.min(relativeX, maxRevealDistance);
-      setWidthPercentage((effectiveDistance / maxRevealDistance) * 100);
+      setWidthPercentage((relativeX / localWidth) * 100);
     }
   }
 
@@ -83,7 +73,6 @@ export const TextRevealCard = ({
       {children}
 
       <div className="h-40 relative flex items-center overflow-hidden">
-        {/* Reveal text effect layer */}
         <motion.div
           style={{ width: "100%" }}
           animate={
@@ -115,11 +104,9 @@ export const TextRevealCard = ({
           transition={isMouseOver ? { duration: 0 } : { duration: 0.4 }}
           className="h-40 w-[8px] bg-gradient-to-b from-transparent via-neutral-800 to-transparent absolute z-50 will-change-transform"
         ></motion.div>
-        {/* Base text container with a fixed, smaller width */}
-        <div
-          ref={revealContainerRef}
-          className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white,transparent)] w-[3rem]"
-        >
+
+        <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]">
+          {/* Changed base text styling to a solid grey (text-gray-500) */}
           <p className="text-4xl md:text-5xl py-10 font-bold text-gray-500">
             {text}
           </p>
@@ -157,6 +144,7 @@ export const TextRevealCardDescription = ({
 };
 
 const Stars = () => {
+  // Original subtle motion: values between -2 and 2 pixels.
   const randomMove = () => Math.random() * 4 - 2;
   const randomOpacity = () => Math.random();
   const random = () => Math.random();
