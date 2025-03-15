@@ -42,7 +42,7 @@ export const CanvasReveal = () => {
       velocity: { x: number; y: number }
     }[] = []
 
-    const colors = ["#FF5F6D", "#FFC371", "#FF9A8B", "#FF6A88", "#FF99AC"]
+    const colors = ["#FFFFFF"] //  #FF5F6D", "#FFC371", "#FF9A8B", "#FF6A88", "#FF99AC
 
     // Create particles
     const createParticles = () => {
