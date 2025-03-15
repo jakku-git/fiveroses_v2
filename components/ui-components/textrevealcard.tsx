@@ -86,7 +86,6 @@ export const TextRevealCard = ({
                 }
           }
           transition={isMouseOver ? { duration: 0 } : { duration: 0.4 }}
-          // Set background to transparent instead of a solid color.
           className="absolute bg-transparent z-20 will-change-transform"
         >
           <p
@@ -107,7 +106,8 @@ export const TextRevealCard = ({
         ></motion.div>
 
         <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]">
-          <p className="text-4xl md:text-5xl py-10 font-bold bg-clip-text text-transparent bg-[#323238]">
+          {/* Changed base text styling to a solid grey (text-gray-500) */}
+          <p className="text-4xl md:text-5xl py-10 font-bold text-gray-500">
             {text}
           </p>
           <MemoizedStars />
