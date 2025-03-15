@@ -26,31 +26,31 @@ export const AppleCardsCarousel = () => {
       id: 1,
       title: "Brand Redesign",
       category: "Branding",
-      image: "/placeholder.svg?height=480&width=320",
+      image: "/pexels-volkerthimm-19049367.jpg",
     },
     {
       id: 2,
       title: "E-commerce Platform",
-      category: "Web Development",
-      image: "/placeholder.svg?height=480&width=320",
+      category: "pexels-cottonbro-5077061.jpg",
+      image: "/pexels-cottonbro-5077061.jpg",
     },
     {
       id: 3,
       title: "Mobile App Design",
       category: "UI/UX",
-      image: "/placeholder.svg?height=480&width=320",
+      image: "/pexels-nathanjhilton-8021284.jpg",
     },
     {
       id: 4,
       title: "Marketing Campaign",
       category: "Digital Marketing",
-      image: "/placeholder.svg?height=480&width=320",
+      image: "/pexels-huuhuynh-18485748.jpg",
     },
     {
       id: 5,
       title: "Corporate Website",
       category: "Web Design",
-      image: "/placeholder.svg?height=480&width=320",
+      image: "/pexels-drew-williams-1285451-3098683.jpg",
     },
   ]
 
