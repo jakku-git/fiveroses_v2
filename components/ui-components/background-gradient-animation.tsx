@@ -35,7 +35,7 @@ const BackgroundGradientAnimation = ({
   fourthColor = "200, 50, 50",
   fifthColor = "180, 180, 50",
   pointerColor = "140, 100, 255",
-  size = "80%",
+  size = "300px",
   blendingValue = "hard-light",
   children,
   className,
@@ -53,7 +53,18 @@ const BackgroundGradientAnimation = ({
     document.body.style.setProperty("--pointer-color", pointerColor);
     document.body.style.setProperty("--size", size);
     document.body.style.setProperty("--blending-value", blendingValue);
-  }, [gradientBackgroundStart, gradientBackgroundEnd, firstColor, secondColor, thirdColor, fourthColor, fifthColor, pointerColor, size, blendingValue]);
+  }, [
+    gradientBackgroundStart,
+    gradientBackgroundEnd,
+    firstColor,
+    secondColor,
+    thirdColor,
+    fourthColor,
+    fifthColor,
+    pointerColor,
+    size,
+    blendingValue,
+  ]);
 
   // Create spring motion values from the mousePos.
   const motionX = useSpring(mousePos.x, { stiffness: 100, damping: 20 });
@@ -65,18 +76,19 @@ const BackgroundGradientAnimation = ({
     motionY.set(mousePos.y);
   }, [mousePos.x, mousePos.y, motionX, motionY]);
 
-  // Combine the translation with a -50% offset to center on the cursor.
+  // Combine translation with -50% offset so that the circle's center follows the cursor.
   const transform = useMotionTemplate`translate(${motionX}px, ${motionY}px) translate(-50%, -50%)`;
 
-  // Use a ref (if needed for further customization).
+  // Use a ref for potential future use.
   const interactiveRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className={cn("relative overflow-hidden pointer-events-none", containerClassName)} ref={interactiveRef}>
       <div className={cn("", className)}>{children}</div>
+      {/* This motion.div now is a circle that follows the mouse */}
       <motion.div
-        className={cn("absolute inset-0 gradients-container blur-2xl animate-hue", "[filter:url(#blurMe)_blur(40px)]")}
-        style={{ transform }}
+        className={cn("absolute rounded-full overflow-hidden gradients-container blur-2xl animate-hue", "[filter:url(#blurMe)_blur(40px)]")}
+        style={{ width: size, height: size, transform }}
       >
         <svg className="hidden">
           <defs>

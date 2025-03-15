@@ -35,7 +35,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Our Services Section with pastel background and interactive effect */}
+      {/* Our Services Section with deeper pastel background and interactive circle effect */}
       <section
         id="services"
         ref={servicesRef}
@@ -50,10 +50,10 @@ export default function Home() {
           }
         }}
       >
-        {/* Full edge-to-edge pastel background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-200 via-blue-200 to-green-200 animate-gradient-pastel" />
+        {/* Full edge-to-edge pastel background with deeper colors */}
+        <div className="absolute inset-0 bg-gradient-to-r from-pink-300 via-blue-300 to-green-300 animate-gradient-pastel" />
   
-        {/* Interactive gradient effect that follows the cursor */}
+        {/* Interactive circle effect */}
         <BackgroundGradientAnimation mousePos={mousePos} interactive containerClassName="absolute inset-0" />
   
         {/* Content container */}
