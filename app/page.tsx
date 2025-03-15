@@ -26,8 +26,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="services" className="py-20">
-        <div className="container mx-auto px-4">
+      {/* Updated "Our Services" Section with full-width animated gradient background */}
+      <section id="services" className="relative py-20 overflow-hidden">
+        {/* Animated gradient background spanning the entire section */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 animate-gradient-xy" />
+        {/* Content container remains centered */}
+        <div className="relative container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Services</h2>
           <BentoGrid />
         </div>
@@ -84,4 +88,3 @@ export default function Home() {
     </main>
   )
 }
-
