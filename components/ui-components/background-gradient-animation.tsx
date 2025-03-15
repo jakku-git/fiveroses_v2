@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useSpring, useMotionTemplate } from "framer-motion";
 
 interface MousePos {
@@ -25,7 +25,7 @@ interface BackgroundGradientAnimationProps {
   containerClassName?: string;
 }
 
-export const BackgroundGradientAnimation = ({
+const BackgroundGradientAnimation = ({
   mousePos,
   gradientBackgroundStart = "rgb(108, 0, 162)",
   gradientBackgroundEnd = "rgb(0, 17, 82)",
@@ -41,7 +41,7 @@ export const BackgroundGradientAnimation = ({
   className,
   containerClassName,
 }: BackgroundGradientAnimationProps) => {
-  // Set CSS variables on body for the gradient colors.
+  // Set CSS variables for the gradient colors.
   useEffect(() => {
     document.body.style.setProperty("--gradient-background-start", gradientBackgroundStart);
     document.body.style.setProperty("--gradient-background-end", gradientBackgroundEnd);
@@ -55,19 +55,26 @@ export const BackgroundGradientAnimation = ({
     document.body.style.setProperty("--blending-value", blendingValue);
   }, [gradientBackgroundStart, gradientBackgroundEnd, firstColor, secondColor, thirdColor, fourthColor, fifthColor, pointerColor, size, blendingValue]);
 
-  // Create smooth motion values from the passed-in mousePos.
+  // Create spring motion values from the mousePos.
   const motionX = useSpring(mousePos.x, { stiffness: 100, damping: 20 });
   const motionY = useSpring(mousePos.y, { stiffness: 100, damping: 20 });
+
+  // Update the springs when mousePos changes.
+  useEffect(() => {
+    motionX.set(mousePos.x);
+    motionY.set(mousePos.y);
+  }, [mousePos.x, mousePos.y, motionX, motionY]);
+
   const transform = useMotionTemplate`translate(${motionX}px, ${motionY}px)`;
 
+  // Use a ref for potential future use.
+  const interactiveRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className={cn("relative overflow-hidden pointer-events-none", containerClassName)}>
+    <div className={cn("relative overflow-hidden pointer-events-none", containerClassName)} ref={interactiveRef}>
       <div className={cn("", className)}>{children}</div>
       <motion.div
-        className={cn(
-          "absolute inset-0 gradients-container blur-2xl",
-          "[filter:url(#blurMe)_blur(40px)]"
-        )}
+        className={cn("absolute inset-0 gradients-container blur-2xl", "[filter:url(#blurMe)_blur(40px)]")}
         style={{ transform }}
       >
         <svg className="hidden">
@@ -148,3 +155,5 @@ export const BackgroundGradientAnimation = ({
     </div>
   );
 };
+
+export default BackgroundGradientAnimation;
