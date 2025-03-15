@@ -3,7 +3,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { SparklesCore } from "@/components/ui-components/sparkletext"; // ✅ Import Sparkles
 
 export const Cover = ({
   children,
@@ -47,24 +46,3 @@ export const Cover = ({
             transition={{ duration: 0.2 }}
             className="absolute inset-0 h-full w-full overflow-hidden"
           >
-            <motion.div
-              animate={{ translateX: ["-50%", "0%"] }}
-              transition={{ duration: 10, ease: "linear", repeat: Infinity }}
-              className="absolute inset-0"
-            >
-              {beamPositions.map((position, index) => (
-                <div
-                  key={index}
-                  className="absolute left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-white to-transparent opacity-50"
-                  style={{ top: position }}
-                />
-              ))}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <div className="relative z-10 text-white font-bold">{children}</div>
-      {hovered && <SparklesCore />} {/* ✅ Add sparkles when hovered */}
-    </div>
-  );
-};

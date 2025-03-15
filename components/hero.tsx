@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react"
 import { motion } from "framer-motion"
-import { SparkleText } from "@/components/ui-components/sparkletext"
+import { Cover } from "@/components/ui-components/cover" // ✅ Import Cover component
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -34,7 +34,7 @@ export function Hero() {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden" ref={containerRef}>
       <div className="absolute inset-0 z-0">
-        {/* Modified gradient overlay with semi-transparent final color */}
+        {/* Modified gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/60 z-10" />
         <div className="grid grid-cols-3 h-full">
           <div className="relative overflow-hidden">
@@ -84,20 +84,6 @@ export function Hero() {
           className="text-center"
         >
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
-            BRING YOUR IDEAS <SparkleText>ALIVE</SparkleText>
+            BRING YOUR IDEAS <Cover>ALIVE</Cover>
           </h1>
-          <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8">
-            YOUR BRAND'S STORY STARTS HERE
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-rose-500 hover:bg-rose-600 text-white px-8 py-3 rounded-full text-lg font-medium transition-colors"
-          >
-            Explore Our Work
-          </motion.button>
-        </motion.div>
-      </div>
-    </section>
-  )
-}
+          <
