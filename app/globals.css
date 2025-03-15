@@ -15,8 +15,8 @@
 }
 
 :root {
-  --background: 0 0% 3.9%;
-  --foreground: 0 0% 98%;
+  --background: 0 0% 3.9%;  /* Adjust if needed */
+  --foreground: 0 0% 98%;    /* Adjust if needed */
   --card: 0 0% 3.9%;
   --card-foreground: 0 0% 98%;
   --popover: 0 0% 3.9%;
@@ -67,14 +67,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Optionally remove universal border styles if causing issues */
+/* 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
     @apply bg-background text-foreground;
   }
 }
+*/
 
 /* Animated Gradient Background CSS */
 @keyframes gradient-xy {
