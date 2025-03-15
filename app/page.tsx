@@ -15,14 +15,10 @@ import { EvervaultCard } from "@/components/ui-components/evervault-card";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { Footer } from "@/components/footer";
-import EvervaultBackground from "@/components/ui-components/evervault-background";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-transparent text-white overflow-hidden">
-      {/* Full-screen evervault background */}
-      <EvervaultBackground text="Evervault" />
-
+    <main className="relative min-h-screen bg-black text-white overflow-hidden">
       <Navbar />
       <Hero />
 
