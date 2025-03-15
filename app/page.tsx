@@ -20,7 +20,7 @@ import EvervaultBackground from "@/components/ui-components/evervault-background
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-transparent text-white overflow-hidden">
-      {/* Full-screen Evervault background */}
+      {/* Full-screen evervault background */}
       <EvervaultBackground text="Evervault" />
 
       <Navbar />
