@@ -62,7 +62,7 @@ export default function Home() {
         id="services"
         ref={servicesRef}
         className="relative py-20 overflow-hidden"
-        onMouseMove={(e) => {
+        onMouseMoveCapture={(e) => {
           if (servicesRef.current) {
             const rect = servicesRef.current.getBoundingClientRect();
             setMousePos({
@@ -74,7 +74,6 @@ export default function Home() {
       >
         <BackgroundGradientAnimation interactive containerClassName="absolute inset-0" />
   
-        {/* Content container remains centered above the background */}
         <div className="relative container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Services</h2>
           <BentoGrid />
