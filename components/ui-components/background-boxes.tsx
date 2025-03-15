@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { TextGenerateEffect } from "@/components/ui-components/text-generate-effect";
 import { TextHoverEffect } from "@/components/ui-components/text-hover-effect";
-import { EvervaultBackground } from "@/components/ui/evervault-background";
+import { EvervaultBackground } from "@/components/ui-components/evervault-background";
 
 export const BackgroundBoxes = () => {
   const [mounted, setMounted] = useState(false);

@@ -53,7 +53,7 @@ export default function Home() {
         <BackgroundBoxes />
         <div className="container mx-auto px-4 relative z-40">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">About Us</h2>
-          {/* Add additional About Us content here */}
+          {/* Additional About Us content */}
         </div>
       </section>
 
