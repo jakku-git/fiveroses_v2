@@ -2,49 +2,6 @@
 
 import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
-
-// TextGenerateEffect using Framer Motion
-export const TextGenerateEffect = ({
-  words,
-  className,
-  duration = 0.5,
-}: {
-  words: string;
-  className?: string;
-  duration?: number;
-}) => {
-  // Split the headline by spaces
-  const wordsArray = words.split(" ");
-  return (
-    <div className={cn("font-bold", className)}>
-      <div className="mt-4">
-        <div className="dark:text-white text-black text-2xl leading-snug tracking-wide">
-          {wordsArray.map((word, idx) => (
-            <motion.span
-              key={word + idx}
-              className="inline-block opacity-0"
-              initial={{ opacity: 0, filter: "blur(10px)" }}
-              animate={{
-                opacity: [0, 1, 1, 0],
-                filter: ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"],
-              }}
-              transition={{
-                duration: duration,
-                delay: idx * 0.2,
-                repeat: Infinity,
-                repeatDelay: 0.3, // Pause briefly before looping again
-                ease: "easeInOut",
-              }}
-            >
-              {word}{" "}
-            </motion.span>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -52,14 +9,21 @@ export function Hero() {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
+
       const { clientX, clientY } = e;
       const rect = containerRef.current.getBoundingClientRect();
-      const xPercent = (clientX - rect.left) / rect.width;
-      const yPercent = (clientY - rect.top) / rect.height;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+
+      const xPercent = x / rect.width;
+      const yPercent = y / rect.height;
+
       const videos = containerRef.current.querySelectorAll(".hero-video");
       videos.forEach((video, index) => {
         const factor = (index + 1) * 10;
-        (video as HTMLElement).style.transform = `translate(${(xPercent - 0.5) * factor}px, ${(yPercent - 0.5) * factor}px)`;
+        (video as HTMLElement).style.transform = `translate(${
+          (xPercent - 0.5) * factor
+        }px, ${(yPercent - 0.5) * factor}px)`;
       });
     };
 
@@ -67,17 +31,10 @@ export function Hero() {
     return () => document.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  const handleExploreWork = () => {
-    const workSection = document.getElementById("work");
-    if (workSection) {
-      workSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden" ref={containerRef}>
       <div className="absolute inset-0 z-0">
-        {/* Gradient overlay */}
+        {/* ✅ Modified gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/60 z-10" />
         <div className="grid grid-cols-3 h-full">
           <div className="relative overflow-hidden">
@@ -119,19 +76,27 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-20 text-center">
-        <TextGenerateEffect words="BRING YOUR IDEAS ALIVE" className="text-5xl md:text-7xl lg:text-8xl" />
-        <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 text-white/80">
-          YOUR BRAND'S STORY STARTS HERE
-        </p>
-        <motion.button
-          onClick={handleExploreWork}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-rose-500 hover:bg-rose-600 text-white px-8 py-3 rounded-full text-lg font-medium transition-colors"
+      <div className="container mx-auto px-4 relative z-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center"
         >
-          Explore Our Work
-        </motion.button>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white">
+            BRING YOUR IDEAS ALIVE
+          </h1>
+          <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 text-white/80">
+            YOUR BRAND'S STORY STARTS HERE
+          </p>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-rose-500 hover:bg-rose-600 text-white px-8 py-3 rounded-full text-lg font-medium transition-colors"
+          >
+            Explore Our Work
+          </motion.button>
+        </motion.div>
       </div>
     </section>
   );
