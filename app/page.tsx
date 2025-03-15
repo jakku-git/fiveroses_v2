@@ -1,3 +1,5 @@
+"use client";
+
 import { useMotionValue, useTransform, motion } from "framer-motion";
 import { useEffect } from "react";
 import { BackgroundBoxes } from "@/components/ui-components/background-boxes";
