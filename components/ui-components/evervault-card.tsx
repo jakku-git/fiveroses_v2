@@ -79,7 +79,7 @@ export const EvervaultCard = () => {
           ))}
         </svg>
 
-        <Image src="/placeholder.svg?height=400&width=300" alt="Team member" fill className="object-cover opacity-70" />
+        <Image src="/pexels-cottonbro-9748522.jpg" alt="Team member" fill className="object-cover opacity-70" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
       </div>
 
