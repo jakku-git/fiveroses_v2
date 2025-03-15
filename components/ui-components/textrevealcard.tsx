@@ -66,7 +66,6 @@ export const TextRevealCard = ({
       onTouchMove={touchMoveHandler}
       ref={cardRef}
       className={cn(
-        // Reduced width to 35% of original: 5.6rem
         "bg-[#1d1c20] border border-white/[0.08] w-[5.6rem] rounded-lg p-8 relative overflow-hidden",
         className
       )}
@@ -87,13 +86,11 @@ export const TextRevealCard = ({
                 }
           }
           transition={isMouseOver ? { duration: 0 } : { duration: 0.4 }}
-          className="absolute bg-[#1d1c20] z-20 will-change-transform"
+          // Set background to transparent instead of a solid color.
+          className="absolute bg-transparent z-20 will-change-transform"
         >
           <p
-            style={{
-              textShadow: "4px 4px 15px rgba(0,0,0,0.5)",
-              opacity: 0.7, // Added translucency
-            }}
+            style={{ textShadow: "4px 4px 15px rgba(0,0,0,0.5)" }}
             className="text-4xl md:text-5xl py-10 font-bold text-white bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-300"
           >
             {revealText}
@@ -163,7 +160,6 @@ const Stars = () => {
             scale: [1, 1.2, 0],
           }}
           transition={{
-            // Duration reduced by half: random value between 10 and 15 seconds.
             duration: random() * 5 + 10,
             repeat: Infinity,
             ease: "linear",
