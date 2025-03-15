@@ -2,7 +2,8 @@
 
 import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Cover } from "@/components/ui-components/cover"; // ✅ Ensure correct import
+import { Cover } from "@/components/ui-components/cover"; // ✅ Ensuring proper import
+import { SparklesCore } from "@/components/ui-components/sparkles"; // ✅ Adding Sparkles
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -22,8 +23,9 @@ export function Hero() {
       const videos = containerRef.current.querySelectorAll(".hero-video");
       videos.forEach((video, index) => {
         const factor = (index + 1) * 10;
-        (video as HTMLElement).style.transform =
-          `translate(${(xPercent - 0.5) * factor}px, ${(yPercent - 0.5) * factor}px)`;
+        (video as HTMLElement).style.transform = `translate(${
+          (xPercent - 0.5) * factor
+        }px, ${(yPercent - 0.5) * factor}px)`;
       });
     };
 
@@ -34,7 +36,7 @@ export function Hero() {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden" ref={containerRef}>
       <div className="absolute inset-0 z-0">
-        {/* Modified gradient overlay */}
+        {/* ✅ Modified gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/60 z-10" />
         <div className="grid grid-cols-3 h-full">
           <div className="relative overflow-hidden">
@@ -76,6 +78,16 @@ export function Hero() {
         </div>
       </div>
 
+      {/* ✅ Sparkles Background */}
+      <SparklesCore
+        className="absolute inset-0 h-full w-full z-10"
+        particleColor="#FFD700" // Golden sparkles
+        minSize={1}
+        maxSize={3}
+        speed={3}
+        particleDensity={150}
+      />
+
       <div className="container mx-auto px-4 relative z-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -83,7 +95,7 @@ export function Hero() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white relative">
             BRING YOUR IDEAS <Cover>ALIVE</Cover>
           </h1>
           <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 text-white/80">
