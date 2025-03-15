@@ -66,7 +66,8 @@ export const TextRevealCard = ({
       onTouchMove={touchMoveHandler}
       ref={cardRef}
       className={cn(
-        "bg-[#1d1c20] border border-white/[0.08] w-[40rem] rounded-lg p-8 relative overflow-hidden",
+        // Changed width from 40rem to 16rem (40% of 40rem)
+        "bg-[#1d1c20] border border-white/[0.08] w-[16rem] rounded-lg p-8 relative overflow-hidden",
         className
       )}
     >
@@ -105,8 +106,8 @@ export const TextRevealCard = ({
           className="h-40 w-[8px] bg-gradient-to-b from-transparent via-neutral-800 to-transparent absolute z-50 will-change-transform"
         ></motion.div>
 
-        {/* Updated mask gradient to be a bit more translucent */}
-        <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,rgba(255,255,255,0.3),rgba(255,255,255,0.8),rgba(255,255,255,0.3))]">
+        {/* Reverted mask to original state */}
+        <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]">
           <p className="text-4xl md:text-5xl py-10 font-bold bg-clip-text text-transparent bg-[#323238]">
             {text}
           </p>
@@ -144,7 +145,7 @@ export const TextRevealCardDescription = ({
 };
 
 const Stars = () => {
-  // Revert to original subtle motion: between -2 and 2 pixels.
+  // Reverting to original subtle motion: values between -2 and 2.
   const randomMove = () => Math.random() * 4 - 2;
   const randomOpacity = () => Math.random();
   const random = () => Math.random();
@@ -160,8 +161,8 @@ const Stars = () => {
             scale: [1, 1.2, 0],
           }}
           transition={{
-            // Revert to original duration: random value between 20 and 30 seconds.
-            duration: random() * 10 + 20,
+            // Duration reduced by half: random value between 10 and 15 seconds.
+            duration: random() * 5 + 10,
             repeat: Infinity,
             ease: "linear",
           }}
