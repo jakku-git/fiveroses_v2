@@ -21,13 +21,12 @@ export const TextRevealCard = ({
   const [localWidth, setLocalWidth] = useState(0);
   const [isMouseOver, setIsMouseOver] = useState(false);
 
-  // You can adjust the revealFactor if you still want to limit the drag distance
-  const revealFactor = 1; // 1 means full drag distance
+  // Set revealFraction to 0.3: the reveal effect will complete when the mouse has moved 30% of the card's width.
+  const revealFraction = 0.3;
 
   useEffect(() => {
     if (cardRef.current) {
-      const { left, width: localWidth } =
-        cardRef.current.getBoundingClientRect();
+      const { left, width: localWidth } = cardRef.current.getBoundingClientRect();
       setLeft(left);
       setLocalWidth(localWidth);
     }
@@ -38,7 +37,9 @@ export const TextRevealCard = ({
     const { clientX } = event;
     if (cardRef.current) {
       const relativeX = clientX - left;
-      setWidthPercentage((relativeX / localWidth) * 100 * revealFactor);
+      const maxRevealDistance = localWidth * revealFraction;
+      const effectiveDistance = Math.min(relativeX, maxRevealDistance);
+      setWidthPercentage((effectiveDistance / maxRevealDistance) * 100);
     }
   }
 
@@ -54,7 +55,9 @@ export const TextRevealCard = ({
     const clientX = event.touches[0]!.clientX;
     if (cardRef.current) {
       const relativeX = clientX - left;
-      setWidthPercentage((relativeX / localWidth) * 100 * revealFactor);
+      const maxRevealDistance = localWidth * revealFraction;
+      const effectiveDistance = Math.min(relativeX, maxRevealDistance);
+      setWidthPercentage((effectiveDistance / maxRevealDistance) * 100);
     }
   }
 
@@ -74,7 +77,6 @@ export const TextRevealCard = ({
       )}
     >
       {children}
-
       <div className="h-40 relative flex items-center overflow-hidden">
         <motion.div
           style={{ width: "100%" }}
@@ -107,31 +109,9 @@ export const TextRevealCard = ({
           transition={isMouseOver ? { duration: 0 } : { duration: 0.4 }}
           className="h-40 w-[8px] bg-gradient-to-b from-transparent via-neutral-800 to-transparent absolute z-50 will-change-transform"
         ></motion.div>
-
         <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]">
           <p className="text-4xl md:text-5xl py-10 font-bold bg-clip-text text-transparent bg-[#323238]">
-            {text.split("").map((letter, i, letters) => {
-              const total = letters.length;
-              // For each letter, determine the fade start and fade end thresholds.
-              const fadeStart = (i / total) * 100;
-              const fadeRange = 20; // each letter fades out over 20% of the movement
-              let letterOpacity = 1;
-              if (widthPercentage < fadeStart) {
-                letterOpacity = 1;
-              } else if (widthPercentage > fadeStart + fadeRange) {
-                letterOpacity = 0;
-              } else {
-                letterOpacity = 1 - (widthPercentage - fadeStart) / fadeRange;
-              }
-              return (
-                <motion.span
-                  key={i}
-                  style={{ display: "inline-block", opacity: letterOpacity }}
-                >
-                  {letter}
-                </motion.span>
-              );
-            })}
+            {text}
           </p>
           <MemoizedStars />
         </div>
@@ -173,7 +153,7 @@ const Stars = () => {
   const random = () => Math.random();
   return (
     <div className="absolute inset-0">
-      {[...Array(480)].map((_, i) => (
+      {[...Array(240)].map((_, i) => (
         <motion.span
           key={`star-${i}`}
           animate={{
