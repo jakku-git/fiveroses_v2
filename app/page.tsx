@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { BackgroundBoxes } from "@/components/ui-components/background-boxes";
 import { ThreeDCard } from "@/components/ui-components/3d-card";
 import { AppleCardsCarousel } from "@/components/ui-components/apple-cards-carousel";
-import BackgroundGradientAnimation from "@/components/ui-components/background-gradient-animation";
 import { BentoGrid } from "@/components/ui-components/bento-grid";
 import { CanvasReveal } from "@/components/ui-components/canvas-reveal";
 import { CardHoverEffect } from "@/components/ui-components/card-hover-effect";
@@ -16,15 +15,17 @@ import { EvervaultCard } from "@/components/ui-components/evervault-card";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { Footer } from "@/components/footer";
+import EvervaultBackground from "@/components/ui-components/evervault-background";
 
 type MousePos = { x: number; y: number };
 
 export default function Home() {
-  const [mousePos, setMousePos] = useState<MousePos>({ x: 0, y: 0 });
-  const servicesRef = useRef<HTMLDivElement>(null);
-
+  // We don't need to track mouse position here since the background component handles it.
   return (
-    <main className="min-h-screen bg-black text-white overflow-hidden">
+    <main className="relative min-h-screen bg-black text-white overflow-hidden">
+      {/* Full-screen interactive background */}
+      <EvervaultBackground />
+
       <Navbar />
       <Hero />
 
@@ -35,29 +36,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Our Services Section with deeper pastel background and interactive circle effect */}
-      <section
-        id="services"
-        ref={servicesRef}
-        className="relative py-20 overflow-hidden"
-        onMouseMoveCapture={(e) => {
-          if (servicesRef.current) {
-            const rect = servicesRef.current.getBoundingClientRect();
-            setMousePos({
-              x: e.clientX - rect.left,
-              y: e.clientY - rect.top,
-            });
-          }
-        }}
-      >
-        {/* Full edge-to-edge pastel background with deeper colors */}
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-300 via-blue-300 to-green-300 animate-gradient-pastel" />
-  
-        {/* Interactive circle effect */}
-        <BackgroundGradientAnimation mousePos={mousePos} interactive containerClassName="absolute inset-0" />
-  
-        {/* Content container */}
-        <div className="relative container mx-auto px-4">
+      <section id="services" className="py-20">
+        <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Services</h2>
           <BentoGrid />
         </div>
