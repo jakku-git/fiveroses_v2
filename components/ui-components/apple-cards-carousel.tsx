@@ -9,11 +9,6 @@ const CARD_HEIGHT = 480
 const MARGIN = 20
 const CARD_SIZE = CARD_WIDTH + MARGIN
 
-const BREAKPOINTS = {
-  sm: 640,
-  lg: 1024,
-}
-
 export const AppleCardsCarousel = () => {
   const [width, setWidth] = useState(0)
   const [activeCard, setActiveCard] = useState(0)
@@ -31,7 +26,7 @@ export const AppleCardsCarousel = () => {
     {
       id: 2,
       title: "E-commerce Platform",
-      category: "pexels-cottonbro-5077061.jpg",
+      category: "E-commerce",
       image: "/pexels-cottonbro-5077061.jpg",
     },
     {
@@ -83,13 +78,6 @@ export const AppleCardsCarousel = () => {
     controls.start({ x: -index * CARD_SIZE })
   }
 
-  const getVisibleCards = () => {
-    if (typeof window === "undefined") return 3
-    if (window.innerWidth < BREAKPOINTS.sm) return 1
-    if (window.innerWidth < BREAKPOINTS.lg) return 2
-    return 3
-  }
-
   return (
     <div className="relative overflow-hidden py-12">
       <motion.div
@@ -105,7 +93,7 @@ export const AppleCardsCarousel = () => {
         {projects.map((project, index) => (
           <motion.div
             key={project.id}
-            className={`relative min-w-[${CARD_WIDTH}px] h-[${CARD_HEIGHT}px] rounded-2xl overflow-hidden mx-[10px] transition-shadow duration-300 ${
+            className={`relative min-w-[320px] h-[480px] rounded-2xl overflow-hidden mx-[10px] transition-shadow duration-300 ${
               activeCard === index ? "shadow-2xl" : "shadow-lg"
             }`}
             animate={{
@@ -139,4 +127,3 @@ export const AppleCardsCarousel = () => {
     </div>
   )
 }
-
