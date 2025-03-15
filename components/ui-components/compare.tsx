@@ -52,12 +52,12 @@ export const Compare = () => {
         onMouseMove={handleMouseMove}
       >
         <div className="absolute inset-0 z-10">
-          <Image src="/placeholder.svg?height=500&width=800" alt="After" fill className="object-cover" />
+          <Image src="/pexels-artempodrez-6800941.jpg" alt="After" fill className="object-cover" />
         </div>
 
         <div className="absolute inset-0 z-20 overflow-hidden" style={{ width: `${position}%` }}>
           <Image
-            src="/placeholder.svg?height=500&width=800"
+            src="/pexels-cottonbro-9748522.jpg"
             alt="Before"
             fill
             className="object-cover"
