@@ -48,15 +48,25 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-      <section id="about" className="relative py-20">
-        {/* Full-width background */}
-        <BackgroundBoxes />
-        <div className="container mx-auto px-4 relative z-40">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12">About Us</h2>
-          {/* Additional About Us content */}
+      {/* About Us Section */}
+      <section id="about" className="relative">
+        <div className="relative h-[40rem]">
+          {/* Full-width background with edge-to-edge effect */}
+          <BackgroundBoxes />
+          {/* Centered header over the background */}
+          <div className="absolute inset-0 flex items-center justify-center z-40">
+            <h2 className="text-4xl md:text-5xl font-bold text-white">About Us</h2>
+          </div>
+        </div>
+        {/* Additional About Us content below the background */}
+        <div className="container mx-auto px-4 mt-10">
+          <p className="text-white">
+            A creative digital agency focused on growing brands through strategic and innovative marketing solutions.
+          </p>
         </div>
       </section>
 
+      {/* Services Section */}
       <section
         id="services"
         className="relative py-20 overflow-hidden"
@@ -69,6 +79,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Our Work Section */}
       <section id="work" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Work</h2>
@@ -76,6 +87,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Our Team Section */}
       <section id="team" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Team</h2>
@@ -87,6 +99,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
       <section id="testimonials" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Testimonials</h2>
@@ -94,6 +107,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Projects Section */}
       <section id="projects" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Projects</h2>
@@ -101,6 +115,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Showcase Section */}
       <section id="showcase" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Showcase</h2>
@@ -108,6 +123,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Contact Section */}
       <section id="contact" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Contact Us</h2>
