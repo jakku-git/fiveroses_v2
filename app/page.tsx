@@ -1,7 +1,7 @@
 "use client";
 
-import { useMotionValue, useTransform, useSpring, motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useSpring, useTransform, motion } from "framer-motion";
+import { useState } from "react";
 import { BackgroundBoxes } from "@/components/ui-components/background-boxes";
 import { ThreeDCard } from "@/components/ui-components/3d-card";
 import { AppleCardsCarousel } from "@/components/ui-components/apple-cards-carousel";
@@ -27,49 +27,41 @@ const AnimatedText = ({ text, duration = 0.5, className = "" }: AnimatedTextProp
   return <div className={className}>{text} (duration: {duration})</div>;
 };
 
-type MousePos = {
-  x: number;
-  y: number;
-};
+type MousePos = { x: number; y: number };
 
 type InteractiveGradientBackgroundProps = {
   mousePos: MousePos;
 };
 
+/**
+ * InteractiveGradientBackground
+ *
+ * This component renders a full-edge, continuously animated gradient background
+ * using the CSS animation defined in globals.css (.animate-gradient-xy). It also applies
+ * an interactive translate effect (using Framer Motion) based on the mouse position.
+ */
 const InteractiveGradientBackground = ({ mousePos }: InteractiveGradientBackgroundProps) => {
-  // Initialize motion values with the current mouse position.
-  const x = useMotionValue(mousePos.x);
-  const y = useMotionValue(mousePos.y);
-
-  // Update the motion values when mousePos changes.
-  useEffect(() => {
-    x.set(mousePos.x);
-    y.set(mousePos.y);
-  }, [mousePos.x, mousePos.y, x, y]);
-
-  // Create smooth spring animations for smoother movement.
-  const springX = useSpring(x, { stiffness: 100, damping: 20 });
-  const springY = useSpring(y, { stiffness: 100, damping: 20 });
-
-  // Use a transform to create a subtle parallax offset.
-  const backgroundPosition = useTransform([springX, springY], ([latestX, latestY]) => {
-    return `${(latestX as number) * 0.05}px ${(latestY as number) * 0.05}px`;
-  });
+  // Compute a subtle offset based on the mouse position.
+  // Multiply by a small factor (0.05) for a gentle parallax effect.
+  const offsetX = useSpring(mousePos.x * 0.05, { stiffness: 100, damping: 20 });
+  const offsetY = useSpring(mousePos.y * 0.05, { stiffness: 100, damping: 20 });
+  const transform = useTransform([offsetX, offsetY], ([x, y]) => `translate(${x}px, ${y}px)`);
 
   return (
     <motion.div
-      className="absolute inset-0"
+      className="absolute inset-0 animate-gradient-xy"
       style={{
+        transform,
+        // The CSS animation from globals.css is applied via the class.
         background: "linear-gradient(45deg, #7e5bef, #ff49db, #ff7849)",
         backgroundSize: "200% 200%",
-        backgroundPosition: backgroundPosition,
       }}
     />
   );
 };
 
 export default function Home() {
-  // Track the mouse position for the interactive background.
+  // Track mouse position for the interactive background.
   const [mousePos, setMousePos] = useState<MousePos>({ x: 0, y: 0 });
 
   return (
@@ -77,6 +69,7 @@ export default function Home() {
       <Navbar />
       <Hero />
 
+      {/* Example usage of AnimatedText */}
       <AnimatedText text="Welcome to Our Services" className="text-center text-3xl mb-8" />
 
       <section id="about" className="py-20">
@@ -86,12 +79,15 @@ export default function Home() {
         </div>
       </section>
 
+      {/* "Our Services" Section with full-width interactive gradient background */}
       <section
         id="services"
         className="relative py-20 overflow-hidden"
         onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
       >
+        {/* The interactive gradient background sits edge-to-edge */}
         <InteractiveGradientBackground mousePos={mousePos} />
+        {/* Content container remains centered and sits above the gradient */}
         <div className="relative container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Services</h2>
           <BentoGrid />
