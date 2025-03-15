@@ -15,6 +15,7 @@ import { EvervaultCard } from "@/components/ui-components/evervault-card";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { Footer } from "@/components/footer";
+import { TextRevealCard } from "@/components/ui-components/textrevealcard";
 
 export default function Home() {
   return (
@@ -24,7 +25,13 @@ export default function Home() {
 
       <section id="about" className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12">About Us</h2>
+          <div className="mb-12">
+            <TextRevealCard
+              text="About Us"
+              revealText="Who are we?"
+              className="w-full bg-transparent border-0 p-0"
+            />
+          </div>
           <BackgroundBoxes />
         </div>
       </section>
