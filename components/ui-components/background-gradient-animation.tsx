@@ -92,8 +92,8 @@ export const BackgroundGradientAnimation = ({
       <div className={cn("", className)}>{children}</div>
       <div
         className={cn(
-          "absolute inset-0 gradients-container blur-lg",
-          isSafari ? "blur-2xl" : "[filter:url(#blurMe)_blur(40px)]"
+          "absolute inset-0 gradients-container blur-3xl",
+          isSafari ? "blur-3xl" : "[filter:url(#blurMe)_blur(60px)]"
         )}
       >
         <svg className="hidden">
@@ -101,7 +101,7 @@ export const BackgroundGradientAnimation = ({
             <filter id="blurMe">
               <feGaussianBlur
                 in="SourceGraphic"
-                stdDeviation="10"
+                stdDeviation="20"
                 result="blur"
               />
               <feColorMatrix

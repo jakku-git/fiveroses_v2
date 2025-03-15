@@ -68,20 +68,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* "Our Services" Section with full-width interactive gradient background */}
-      <section
-        id="services"
-        className="relative py-20 overflow-hidden"
-        onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
-      >
-        {/* The interactive gradient background sits edge-to-edge */}
-        <InteractiveGradientBackground mousePos={mousePos} />
-        {/* Content container remains centered and sits above the gradient */}
-        <div className="relative container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Services</h2>
-          <BentoGrid />
-        </div>
-      </section>
+      {/* Our Services Section with enhanced background */}
+<section
+  id="services"
+  className="relative py-20 overflow-hidden"
+  onMouseMove={(e) =>
+    setMousePos({
+      x: e.nativeEvent.offsetX,
+      y: e.nativeEvent.offsetY,
+    })
+  }
+>
+  {/* Enhanced background with extra blur and interactive pointer */}
+  <BackgroundGradientAnimation interactive containerClassName="absolute inset-0" />
+  
+  {/* Interactive circle that follows your mouse */}
+  <motion.div
+    className="absolute w-8 h-8 rounded-full bg-white opacity-50 pointer-events-none"
+    style={{
+      top: mousePos.y - 4,
+      left: mousePos.x - 4,
+    }}
+  />
+  
+  {/* Content container remains centered above the background */}
+  <div className="relative container mx-auto px-4">
+    <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Services</h2>
+    <BentoGrid />
+  </div>
+</section>
+
 
       <section id="work" className="py-20">
         <div className="container mx-auto px-4">
