@@ -66,8 +66,8 @@ export const TextRevealCard = ({
       onTouchMove={touchMoveHandler}
       ref={cardRef}
       className={cn(
-        // Changed width from 40rem to 16rem (40% of 40rem)
-        "bg-[#1d1c20] border border-white/[0.08] w-[16rem] rounded-lg p-8 relative overflow-hidden",
+        // Reduced width to 35% of original: 5.6rem
+        "bg-[#1d1c20] border border-white/[0.08] w-[5.6rem] rounded-lg p-8 relative overflow-hidden",
         className
       )}
     >
@@ -90,7 +90,10 @@ export const TextRevealCard = ({
           className="absolute bg-[#1d1c20] z-20 will-change-transform"
         >
           <p
-            style={{ textShadow: "4px 4px 15px rgba(0,0,0,0.5)" }}
+            style={{
+              textShadow: "4px 4px 15px rgba(0,0,0,0.5)",
+              opacity: 0.7, // Added translucency
+            }}
             className="text-4xl md:text-5xl py-10 font-bold text-white bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-300"
           >
             {revealText}
@@ -106,7 +109,6 @@ export const TextRevealCard = ({
           className="h-40 w-[8px] bg-gradient-to-b from-transparent via-neutral-800 to-transparent absolute z-50 will-change-transform"
         ></motion.div>
 
-        {/* Reverted mask to original state */}
         <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]">
           <p className="text-4xl md:text-5xl py-10 font-bold bg-clip-text text-transparent bg-[#323238]">
             {text}
@@ -145,7 +147,7 @@ export const TextRevealCardDescription = ({
 };
 
 const Stars = () => {
-  // Reverting to original subtle motion: values between -2 and 2.
+  // Original subtle motion: values between -2 and 2 pixels.
   const randomMove = () => Math.random() * 4 - 2;
   const randomOpacity = () => Math.random();
   const random = () => Math.random();
