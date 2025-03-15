@@ -24,13 +24,6 @@ type InteractiveGradientBackgroundProps = {
   mousePos: MousePos;
 };
 
-/**
- * InteractiveGradientBackground
- *
- * This component renders a full-edge, continuously animated gradient background
- * using the CSS animation defined in globals.css (.animate-gradient-xy). It also applies
- * an interactive translate effect (using Framer Motion) based on the mouse position.
- */
 const InteractiveGradientBackground = ({ mousePos }: InteractiveGradientBackgroundProps) => {
   const offsetX = useSpring(mousePos.x * 0.05, { stiffness: 100, damping: 20 });
   const offsetY = useSpring(mousePos.y * 0.05, { stiffness: 100, damping: 20 });
@@ -49,7 +42,6 @@ const InteractiveGradientBackground = ({ mousePos }: InteractiveGradientBackgrou
 };
 
 export default function Home() {
-  // Track mouse position for the interactive background.
   const [mousePos, setMousePos] = useState<MousePos>({ x: 0, y: 0 });
   const servicesRef = useRef<HTMLDivElement>(null);
 
@@ -80,17 +72,7 @@ export default function Home() {
           }
         }}
       >
-        {/* Enhanced background with extra blur and interactive pointer */}
         <BackgroundGradientAnimation interactive containerClassName="absolute inset-0" />
-  
-        {/* Interactive circle that follows your mouse */}
-        <motion.div
-          className="absolute w-8 h-8 rounded-full bg-white opacity-50 pointer-events-none"
-          style={{
-            top: mousePos.y - 4,
-            left: mousePos.x - 4,
-          }}
-        />
   
         {/* Content container remains centered above the background */}
         <div className="relative container mx-auto px-4">
