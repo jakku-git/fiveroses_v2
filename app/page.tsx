@@ -50,12 +50,12 @@ export default function Home() {
           }
         }}
       >
-        {/* Edge-to-edge pastel background */}
+        {/* Full edge-to-edge pastel background */}
         <div className="absolute inset-0 bg-gradient-to-r from-pink-200 via-blue-200 to-green-200 animate-gradient-pastel" />
-        
-        {/* Interactive gradient effect */}
+  
+        {/* Interactive gradient effect that follows the cursor */}
         <BackgroundGradientAnimation mousePos={mousePos} interactive containerClassName="absolute inset-0" />
-        
+  
         {/* Content container */}
         <div className="relative container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Services</h2>

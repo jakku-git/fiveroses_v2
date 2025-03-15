@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useSpring, useMotionTemplate } from "framer-motion";
 
 interface MousePos {
@@ -65,16 +65,17 @@ const BackgroundGradientAnimation = ({
     motionY.set(mousePos.y);
   }, [mousePos.x, mousePos.y, motionX, motionY]);
 
-  // Combine the translation with a -50% offset to center the gradient on the cursor.
+  // Combine the translation with a -50% offset to center on the cursor.
   const transform = useMotionTemplate`translate(${motionX}px, ${motionY}px) translate(-50%, -50%)`;
 
+  // Use a ref (if needed for further customization).
   const interactiveRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className={cn("relative overflow-hidden pointer-events-none", containerClassName)} ref={interactiveRef}>
       <div className={cn("", className)}>{children}</div>
       <motion.div
-        className={cn("absolute inset-0 gradients-container blur-2xl", "[filter:url(#blurMe)_blur(40px)]")}
+        className={cn("absolute inset-0 gradients-container blur-2xl animate-hue", "[filter:url(#blurMe)_blur(40px)]")}
         style={{ transform }}
       >
         <svg className="hidden">
